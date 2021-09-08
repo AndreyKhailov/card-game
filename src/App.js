@@ -1,13 +1,13 @@
-//import logo from './logo.svg';
-import './App.css';
+import Header from './components/header/header';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1>Start project</h1>
-      </header>
-    </div>
+    <>
+      <Header
+        title='Добро пожаловать в CARD GAME!'
+        desc='Учавствуй в сражениях, набирай очки, захватывай вражеские карты. В конце игры тебя ждет уникальный приз!'
+      />
+    </>
   );
 }
 
