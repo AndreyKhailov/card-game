@@ -1,12 +1,12 @@
 
 import s from './layout.module.css';
 
-function Layout({ title, desc, urlBg, colorBg }) {
+function Layout({ title, urlBg, colorBg, children }) {
 
     const styleLayout = {
         backgroundImage: `url(${urlBg})`,
         backgroundColor: colorBg,
-    }
+    };
 
     return (
         <section className={s.root} style={styleLayout}>
@@ -19,7 +19,7 @@ function Layout({ title, desc, urlBg, colorBg }) {
                         <span className={s.separator}></span>
                     </div>
                     <div className={`${s.desc} ${s.full}`}>
-                        <p>{desc}</p>
+                        { children }
                     </div>
                 </article>
             </div>
