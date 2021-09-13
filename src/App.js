@@ -14,7 +14,7 @@ function App() {
     case 'home':
       return <Home onChangePage={handleChangePage} />;
     case 'game':
-      return <Game />;
+      return <Game onChangePage={handleChangePage} />;
     default:
       return <Home />;
   }

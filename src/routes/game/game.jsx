@@ -1,8 +1,8 @@
 import s from './game.module.css';
 
-function Game() {
+function Game({ onChangePage }) {
     const onClickGoToHome = () => {
-        console.log('onClickGoToHome');
+        onChangePage && onChangePage('home');
     };
 
     return (
