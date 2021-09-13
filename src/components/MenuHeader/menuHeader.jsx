@@ -7,7 +7,7 @@ function MenuHeader() {
     const [activeMenu, setActiveMenu] = React.useState(false);
 
     const handleButtonMenu = () => {
-        setActiveMenu(!activeMenu);
+        setActiveMenu(prevState => !prevState);
     };
 
     return (

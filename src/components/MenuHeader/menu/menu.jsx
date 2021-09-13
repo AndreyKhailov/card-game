@@ -1,3 +1,5 @@
+import cn from 'classnames';
+
 import s from './menu.module.css';
 
 const MENU = [
@@ -22,7 +24,11 @@ const MENU = [
 function Menu({ activeMenu }) {
     
     return (
-        <div className={`${s.menuContainer} ${activeMenu ? s.active : s.deactive}`}>
+        <div className={cn(s.menuContainer, {
+            [s.active]: activeMenu,
+            [s.deactive]: !activeMenu,
+        })}
+        >
             <div className={s.overlay} />
             <div className={s.menuItems}>
                 <ul>
