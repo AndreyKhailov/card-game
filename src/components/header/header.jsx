@@ -1,3 +1,5 @@
+import MenuHeader from '../MenuHeader/menuHeader';
+
 import s from './header.module.css';
 
 function Header({ title, desc, onClickButton }) {
@@ -8,6 +10,7 @@ function Header({ title, desc, onClickButton }) {
     return (
         <header className={s.root}>
             <div className={s.forest}></div>
+            <MenuHeader />
             <div className={s.container}>
                 <h1>{title}</h1>
                 <p>{desc}</p>

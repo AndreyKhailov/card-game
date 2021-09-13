@@ -5,10 +5,10 @@ import Layout from '../../components/layout/layout';
 import Footer from '../../components/footer/footer';
 import Cards from '../../components/cards/cards';
 
-import s from './home.module.css';
-
 import bg_1 from '../../asserts/jpg/bglayout_1.jpg';
 import bg_2 from '../../asserts/jpg/bglayout_2.jpg';
+
+import s from './home.module.css';
 
 function Home({ onChangePage }) {
   const handelClickButton = (page) => {
