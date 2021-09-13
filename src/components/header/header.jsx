@@ -1,16 +1,24 @@
+import { MenuHeader } from '../';
+
 import s from './header.module.css';
 
-function Header({ title, desc }) {
+function Header({ title, desc, onClickButton }) {
+    const onClickStartGame = () => {
+        onClickButton && onClickButton('game');
+    };
+
     return (
         <header className={s.root}>
             <div className={s.forest}></div>
+            <MenuHeader />
             <div className={s.container}>
-                {
-                   title && <h1>{title}</h1>
-                }
-                {
-                   desc && <p>{desc}</p>
-                }
+                <h1>{title}</h1>
+                <p>{desc}</p>
+                <button 
+                    onClick={onClickStartGame}
+                >
+                    Start Game
+                </button>
             </div>
         </header>
     )
