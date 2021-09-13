@@ -1,4 +1,4 @@
-import s from 'game.module.css';
+import s from './game.module.css';
 
 function Game() {
     const onClickGoToHome = () => {

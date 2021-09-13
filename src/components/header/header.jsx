@@ -1,10 +1,10 @@
 import s from './header.module.css';
 
-function Header({ title, desc }) {
+function Header({ title, desc, onClickButton }) {
     const onClickStartGame = () => {
-        console.log('onClickStartGame');
+        onClickButton && onClickButton('game');
     };
-    
+
     return (
         <header className={s.root}>
             <div className={s.forest}></div>
