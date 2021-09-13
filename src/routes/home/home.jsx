@@ -1,9 +1,6 @@
 import dateCards from '../../dateCards.json';
 
-import Header from '../../components/header/header';
-import Layout from '../../components/layout/layout';
-import Footer from '../../components/footer/footer';
-import Cards from '../../components/cards/cards';
+import { Header, Layout, Footer, Cards } from '../../components';
 
 import bg_1 from '../../asserts/jpg/bglayout_1.jpg';
 import bg_2 from '../../asserts/jpg/bglayout_2.jpg';

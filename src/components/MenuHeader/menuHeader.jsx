@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Menu from "./menu/menu";
-import NavBar from "./navBar/navBar";
+import { Menu, NavBar } from "./";
 
 function MenuHeader() {
     const [activeMenu, setActiveMenu] = React.useState(false);

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Game from './routes/game/game';
-import Home from './routes/home/home';
+import { Home, Game } from './routes';
 
 function App() {
   const [page, setPage] = React.useState('home');

@@ -1,4 +1,4 @@
-import MenuHeader from '../MenuHeader/menuHeader';
+import { MenuHeader } from '../';
 
 import s from './header.module.css';
 
