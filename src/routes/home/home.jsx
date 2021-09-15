@@ -1,23 +1,19 @@
 import dateCards from '../../dateCards.json';
 
-import { Header, Layout, Footer, Cards } from '../../components';
+import { Header, Layout, Cards } from '../../components';
 
 import bg_1 from '../../asserts/jpg/bglayout_1.jpg';
 import bg_2 from '../../asserts/jpg/bglayout_2.jpg';
 
 import s from './home.module.css';
 
-function Home({ onChangePage }) {
-  const handelClickButton = (page) => {
-    onChangePage && onChangePage(page);
-  };
+function Home() {
 
   return (
     <>
       <Header
         title='Добро пожаловать в CARD GAME!'
         desc='Учавствуй в сражениях, набирай очки, захватывай вражеские карты. В конце игры тебя ждет уникальный приз!'
-        onClickButton={handelClickButton}
       />
       <Layout title='Layout 1!' urlBg={bg_1}>
         <p>
@@ -53,7 +49,6 @@ function Home({ onChangePage }) {
           opponent's card will be captured and changed into the player's color instead.
         </p>
       </Layout>
-      <Footer />
     </>
   );
 }

@@ -18,6 +18,7 @@ function MenuHeader({ bgActive }) {
             />
             <Menu 
                 activeMenu={activeMenu}
+                closeMenu={handleButtonMenu}
             />
         </>
     )

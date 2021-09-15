@@ -1,21 +1,22 @@
-import { MenuHeader } from '../';
+import { useHistory } from 'react-router';
 
 import s from './header.module.css';
 
-function Header({ title, desc, onClickButton }) {
-    const onClickStartGame = () => {
-        onClickButton && onClickButton('game');
+function Header({ title, desc }) {
+    const history = useHistory();
+
+    const onClickToStartGame = () => {
+        history.push('/game');
     };
 
     return (
         <header className={s.root}>
             <div className={s.forest}></div>
-            <MenuHeader />
             <div className={s.container}>
                 <h1>{title}</h1>
                 <p>{desc}</p>
                 <button 
-                    onClick={onClickStartGame}
+                    onClick={onClickToStartGame}
                 >
                     Start Game
                 </button>

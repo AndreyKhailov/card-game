@@ -1,14 +1,19 @@
+import { useHistory } from 'react-router';
+
 import s from './game.module.css';
 
-function Game({ onChangePage }) {
+function Game() {
+    const history = useHistory();
+
     const onClickGoToHome = () => {
-        onChangePage && onChangePage('home');
+        history.push('/');
     };
 
     return (
-        <div>
+        <div className={s.game}>
             <h1>This is start game</h1>
-            <button
+            <button 
+                
                 onClick={onClickGoToHome}
             >
                 Home
