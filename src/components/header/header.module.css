@@ -1,5 +1,6 @@
 .root {
   background: #202736;
+  background: linear-gradient(to bottom, #181d23 0%, #202736 80%);
   background-attachment: fixed;
   background-size: cover;
   position: relative;
@@ -32,15 +33,16 @@
 
 .forest {
   position: absolute;
-  bottom: 0px;
+  bottom: -300px;
   left: 0;
-  background: url('../../asserts/jpg/bg4.jpg') bottom left repeat-x;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Trees.svg?sanitize=true)
+    bottom left repeat-x;
   background-size: cover;
   width: 100%;
-  height: 100%;
+  height: 80%;
   opacity: 0;
   animation: forest-move-in 2000ms 300ms forwards;
-  /* border-bottom: 1px solid #181d23; */
+  border-bottom: 300px solid #181d23;
 }
 
 @keyframes forest-move-in {
@@ -50,6 +52,55 @@
   to {
     opacity: 1;
     background-position-y: 100%;
+  }
+}
+
+.silhouette {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Silhouette.svg?sanitize=true)
+    bottom left no-repeat;
+  width: 50%;
+  height: 50%;
+  opacity: 0;
+  animation: silhouette-move-in 1000ms 800ms forwards;
+}
+
+@keyframes silhouette-move-in {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    opacity: 1;
+    background-position-x: 50%;
+  }
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  position: fixed;
+  background: url(https://raw.githubusercontent.com/yagoestevez/fcc-portfolio/master/src/Images/Moon.svg?sanitize=true)
+    right 150% no-repeat;
+  background-size: 30% 30%;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  animation: moon-move-in 1.2s 1s forwards;
+}
+
+@keyframes moon-move-in {
+  from {
+    opacity: 0;
+    background-position: right 150%;
+  }
+  to {
+    opacity: 1;
+    background-position: top right;
   }
 }
 
@@ -64,6 +115,26 @@
   opacity: 0;
   transform: translate(-50%, -50%);
   animation: text-fade-in 1000ms 800ms forwards;
+}
+
+.container h1 {
+  font-size: 45px;
+  font-weight: normal;
+  font-style: italic;
+  color: #fafafa;
+  line-height: 65px;
+  text-shadow: 0 0 8px #161616;
+  margin-bottom: 24px;
+}
+
+.container p {
+  width: 50%;
+  text-align: end;
+  font-size: 26px;
+  font-weight: normal;
+  color: #fafafa;
+  line-height: 32px;
+  text-shadow: 0 0 6px #161616;
 }
 
 .container button {
@@ -93,25 +164,4 @@
     opacity: 1;
     right: 25%;
   }
-}
-
-.container h1 {
-  font-size: 45px;
-  font-weight: normal;
-  font-style: italic;
-  text-align: center;
-  color: #fafafa;
-  line-height: 65px;
-  text-shadow: 0 0 8px #161616;
-}
-
-.container p {
-  width: 50%;
-  text-align: center;
-  margin-top: 22px;
-  font-size: 26px;
-  font-weight: normal;
-  color: #fafafa;
-  line-height: 32px;
-  text-shadow: 0 0 6px #161616;
 }
