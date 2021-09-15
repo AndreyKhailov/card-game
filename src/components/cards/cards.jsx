@@ -1,20 +1,14 @@
-import React from 'react';
 import cn from 'classnames';
 
 import cardBackPic from '../../asserts/jpg/card-back-side.jpg';
 
 import s from './cards.module.css';
 
-function Cards({ id, type, values, name, img }) {
-    const [active, setActive] = React.useState(false);
-
-    const onClickCard = () => {
-        setActive(prevState => !prevState);
-    };
+function Cards({ id, type, values, name, img, activeCard, onClickCard }) {
 
     return (
-        <div className={s.root} onClick={ onClickCard }>
-            <div className={cn(s.pokemonCard, {[s.active]: active})}>
+        <div className={s.root} onClick={() => onClickCard(id) }>
+            <div className={cn(s.pokemonCard, {[s.active]: activeCard})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
                         <div className={cn(s.pokemon, s[type])}>

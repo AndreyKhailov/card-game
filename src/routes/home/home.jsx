@@ -1,11 +1,7 @@
-import dateCards from '../../dateCards.json';
-
-import { Header, Layout, Cards } from '../../components';
+import { Header, Layout } from '../../components';
 
 import bg_1 from '../../asserts/jpg/bglayout_1.jpg';
 import bg_2 from '../../asserts/jpg/bglayout_2.jpg';
-
-import s from './home.module.css';
 
 function Home() {
 
@@ -21,20 +17,6 @@ function Home() {
           other as "red" on a 3x3 grid. Each player has five cards in a hand and the aim is to
           capture the opponent's cards by turning them into the player's own color of red or blue.
         </p>
-      </Layout>
-      <Layout title='Layout 2' colorBg='#fafafa'>
-        <div className={s.flex}>
-          {dateCards.map((card) => (
-            <Cards
-              key={card.id}
-              id={card.id}
-              type={card.type}
-              values={card.values}
-              name={card.name}
-              img={card.img}
-            />
-          ))}
-        </div>
       </Layout>
       <Layout title='Layout 3' urlBg={bg_2}>
         <p>
