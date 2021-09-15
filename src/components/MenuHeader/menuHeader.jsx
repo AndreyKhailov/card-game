@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Menu, NavBar } from "./";
 
-function MenuHeader() {
-    const [activeMenu, setActiveMenu] = React.useState(false);
+function MenuHeader({ bgActive }) {
+    const [activeMenu, setActiveMenu] = React.useState(null);
 
     const handleButtonMenu = () => {
         setActiveMenu(prevState => !prevState);
@@ -14,6 +14,7 @@ function MenuHeader() {
             <NavBar 
                 activeMenu={activeMenu}
                 onChangeActive={handleButtonMenu}
+                bgActive={bgActive}
             />
             <Menu 
                 activeMenu={activeMenu}

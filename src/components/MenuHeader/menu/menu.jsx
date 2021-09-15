@@ -25,8 +25,8 @@ function Menu({ activeMenu }) {
     
     return (
         <div className={cn(s.menuContainer, {
-            [s.active]: activeMenu,
-            [s.deactive]: !activeMenu,
+            [s.active]: activeMenu === true,
+            [s.deactive]: !activeMenu === false,
         })}
         >
             <div className={s.overlay} />

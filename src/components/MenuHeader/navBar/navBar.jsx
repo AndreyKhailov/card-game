@@ -2,13 +2,13 @@ import cn from 'classnames';
 
 import s from './navBar.module.css';
 
-function NavBar({ activeMenu, onChangeActive }) {
+function NavBar({ activeMenu, bgActive = false, onChangeActive }) {
     const onClickButtonMenu = () => {
         onChangeActive && onChangeActive();
     };
 
     return (
-        <nav className={s.root}>
+        <nav className={cn(s.root, {[s.bgActive]: bgActive})}>
             <div className={s.navWrapper}>
                 <p className={s.brand}>LOGO</p>
                 <button
