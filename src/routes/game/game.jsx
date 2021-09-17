@@ -7,9 +7,11 @@ import { Cards } from '../../components';
 
 import s from './game.module.css';
 
-function Game() {
-    const [cards, setCards] = React.useState(dateCards);
+// Записываем в каждую карточку свойство isActive
+const CardsWithActiveVal = dateCards.map((card) => ({ ...card, isActive: false }))
 
+function Game() {
+    const [cards, setCards] = React.useState(CardsWithActiveVal);
     const history = useHistory();
 
     const onClickGoToHome = () => {
@@ -17,17 +19,12 @@ function Game() {
     };
 
     const onClickCard = (id) => {
-        setCards(prevState => {
-            const onChangeActiveCard = (
-                prevState.map(card => {
-                    if(card.id === id) {
-                        card.isActive = true;
-                    };
-                    return card;
-                })
-            );
-            return onChangeActiveCard;
-        });
+        setCards( cards.map(card => {
+            if(card.id === id) {
+                card.isActive = !card.isActive;
+            };
+            return card;
+        }));
     };
     
     return (
