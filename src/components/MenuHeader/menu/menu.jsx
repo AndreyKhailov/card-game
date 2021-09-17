@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './menu.module.css';
@@ -5,37 +6,41 @@ import s from './menu.module.css';
 const MENU = [
     {
         title: "home",
-        to: '#home'
+        to: '/'
     },
     {
         title: "game",
-        to: '#game'
+        to: '/game'
     },
     {
         title: "about",
-        to: '#about'
+        to: '/about'
     },
     {
         title: "contact",
-        to: '#contact'
+        to: '/contacts'
     },
 ];
 
-function Menu({ activeMenu }) {
-    
+function Menu({ activeMenu, closeMenu }) {
+    const onCloseMenu = () => {
+        closeMenu();
+    };
+
     return (
         <div className={cn(s.menuContainer, {
-            [s.active]: activeMenu,
-            [s.deactive]: !activeMenu,
-        })}
-        >
+            [s.active]: activeMenu === true,
+            [s.deactive]: !activeMenu === false,
+        })}>
             <div className={s.overlay} />
             <div className={s.menuItems}>
                 <ul>
                     {
                         MENU.map(({title, to}, index) => (
-                            <li key={index}>
-                                <a href={to}>{title}</a>
+                            <li key={index} onClick={onCloseMenu}>
+                                <Link to={to}>
+                                    {title}
+                                </Link>
                             </li>
                         ))
                     }
