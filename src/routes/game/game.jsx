@@ -1,48 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
-
-import dateCards from '../../dateCards.json';
 
 import { Cards } from '../../components';
 
+import fireDB from '../../service/firebaseInit';
+
 import s from './game.module.css';
 
-// Записываем в каждую карточку свойство isActive
-const CardsWithActiveVal = dateCards.map((card) => ({ ...card, isActive: false }))
 
 function Game() {
-    const [cards, setCards] = React.useState(CardsWithActiveVal);
+    const [cards, setCards] = useState({});
     const history = useHistory();
+
+    const getCards = () => {
+        fireDB.child('cards').once('value', (snapshot) => setCards(snapshot.val()))
+    };
+
+    useEffect(() => {
+        getCards();
+    }, []);
 
     const onClickGoToHome = () => {
         history.push('/');
     };
 
-    const onClickCard = (id) => {
-        setCards( cards.map(card => {
-            if(card.id === id) {
-                card.isActive = !card.isActive;
-            };
-            return card;
-        }));
+    const onClickIsActiveCard = (id, objID) => {
+        setCards(prevState => {
+            return Object.entries(prevState).reduce((acc, item) => {
+                const card = {...item[1]};
+                if (card.id === id) {
+                    card.isActive = !card.isActive;
+                    fireDB.child('cards/' + objID).update({isActive: card.isActive}).then(() => getCards());
+                };
+                
+                acc[item[0]] = card;
+        
+                return acc;
+            }, {});
+        });
+    };
+
+    const onClickAddCard = () => {
+        const data = Object.values(cards)[1];
+        const newKey = fireDB.child('cards').push().key;
+        fireDB.child('cards/' + newKey).set(data).then(() => getCards());
     };
     
     return (
         <div className={s.game}>
             <h1>This is start game</h1>
+            <button className={s.addCardbtn} onClick={onClickAddCard}>add card</button>
             <div className={s.flex}>
-                {cards.map((card) => (
-                    <Cards
-                        key={card.id}
-                        id={card.id}
-                        type={card.type}
-                        values={card.values}
-                        name={card.name}
-                        img={card.img}
-                        activeCard={card.isActive}
-                        onClickCard={onClickCard}
-                    />
-                ))}
+                {
+                    Object.entries(cards).map(([key, {id, type, values, name, img, isActive}]) => (
+                        <Cards
+                            key={key}
+                            id={id}
+                            objID={key}
+                            type={type}
+                            values={values}
+                            name={name}
+                            img={img}
+                            activeCard={isActive}
+                            onClickCard={onClickIsActiveCard}
+                        />
+                    ))
+                }
         </div>
             <button 
                 onClick={onClickGoToHome}

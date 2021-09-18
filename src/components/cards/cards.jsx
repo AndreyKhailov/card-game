@@ -4,10 +4,14 @@ import cardBackPic from '../../asserts/jpg/card-back-side.jpg';
 
 import s from './cards.module.css';
 
-function Cards({ id, type, values, name, img, activeCard, onClickCard }) {
+function Cards({ objID, id, type, values, name, img, activeCard, onClickCard }) {
+
+    const onHandleClickCard = (id, objID) => {
+        onClickCard(id, objID);
+    };
 
     return (
-        <div className={s.root} onClick={() => onClickCard(id) }>
+        <div className={s.root} onClick={() => onHandleClickCard(id, objID) }>
             <div className={cn(s.pokemonCard, {[s.active]: activeCard})}>
                 <div className={s.cardFront}>
                     <div className={cn(s.wrap, s.front)}>
