@@ -1,6 +1,5 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
-//import { getDatabase, ref, set } from 'firebase/compat/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU',
@@ -18,6 +17,19 @@ const firebaseConfig = {
   appId: '1:1081065656480:web:c91653ee970cc2f229b9c5',
 };
 
-export const fireDB = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-export default fireDB.database().ref();
+class FireBase {
+  constructor() {
+    this.fire = firebase;
+    this.database = this.fire.database();
+  }
+  getCardsOnce = async () => {
+    return await this.database
+      .ref('cards')
+      .once('value')
+      .then((snapshot) => snapshot.val());
+  };
+}
+
+export default FireBase;

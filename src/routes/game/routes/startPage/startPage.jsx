@@ -1,59 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
 
 import { Cards } from '../../../../components';
 
-import fireDB from '../../../../service/firebaseInit';
+import { FireBaseContext } from '../../../../context/fireBaseContext';
+import { CardsContext } from '../../../../context/cardsContext';
 
 import s from './startPage.module.css';
 
-
 function StartPage() {
-    const [cards, setCards] = useState({});
+    const firebase = useContext(FireBaseContext);
+    const cardsContext = useContext(CardsContext);
     const history = useHistory();
 
-    const getCards = () => {
-        fireDB.child('cards').once('value', (snapshot) => setCards(snapshot.val()))
+    const [cards, setCards] = useState({});
+
+    const getCards = async() => {
+        const response = await firebase.getCardsOnce();
+        setCards(response);
     };
 
     useEffect(() => {
         getCards();
     }, []);
 
+    
     const onClickGoToHome = () => {
         history.push('/');
     };
 
-    const onClickIsActiveCard = (id, objID) => {
-        setCards(prevState => {
-            return Object.entries(prevState).reduce((acc, item) => {
-                const card = {...item[1]};
-                if (card.id === id) {
-                    card.isActive = !card.isActive;
-                    fireDB.child('cards/' + objID).update({isActive: card.isActive}).then(() => getCards());
-                };
-                
-                acc[item[0]] = card;
-        
-                return acc;
-            }, {});
-        });
+    const handleChangeSelected = (key) => {
+        const card = {...cards[key]};
+        cardsContext.onSelectedCards(key, card);
+        setCards(prevState => ({
+            ...prevState,
+            [key]: {
+                ...prevState[key],
+                isSelected: !prevState[key].isSelected,
+            }
+        }))
     };
 
-    const onClickAddCard = () => {
-        const data = Object.values(cards)[1];
-        const newKey = fireDB.child('cards').push().key;
-        fireDB.child('cards/' + newKey).set(data).then(() => getCards());
+    const onClickGoToGamePage = () => {
+        history.push('/game/board');
     };
+
+    const checkingNumOfCards = Object.keys(cardsContext.selectedCards).length < 5;
     
     return (
-        <div className={s.startPage}>
+        <div>
             <h1>This is start game</h1>
-            <button className={s.addCardbtn} onClick={onClickAddCard}>add card</button>
+                <button 
+                    className={s.addCardbtn} 
+                    onClick={ onClickGoToGamePage }
+                    disabled={ checkingNumOfCards }
+                >
+                    start game
+                </button>
             <div className={s.flex}>
                 {
-                    Object.entries(cards).map(([key, {id, type, values, name, img, isActive}]) => (
+                    Object.entries(cards).map(([key, { id, type, values, name, img, isSelected }]) => (
                         <Cards
+                            className={s.card}
                             key={key}
                             id={id}
                             objID={key}
@@ -61,8 +69,13 @@ function StartPage() {
                             values={values}
                             name={name}
                             img={img}
-                            activeCard={isActive}
-                            onClickCard={onClickIsActiveCard}
+                            isActive={true}
+                            isSelected={isSelected}
+                            onClickCard={() => {
+                                if(checkingNumOfCards || isSelected) {
+                                    handleChangeSelected(key)
+                                }
+                            }}
                         />
                     ))
                 }
