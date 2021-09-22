@@ -9,14 +9,18 @@ import s from './boardPage.module.css';
 
 const BoardPage = () => {
     const [board, setBoard] = useState([]);
+    const [player2, setPlayer2] = useState([]);
     const { selectedCards } = useContext(CardsContext);
     const history = useHistory();
 
     useEffect( async () => {
-        const responce = await fetch('https://reactmarathon-api.netlify.app/api/board');
-        const request = await responce.json();
+        const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
+        const boardRequest = await boardResponse.json();
+        setBoard(boardRequest.data);
 
-        setBoard(request.data);
+        const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
+        const player2Request = await player2Response.json();
+        setPlayer2(player2Request.data);
     }, []);
 
     if(!Object.keys(selectedCards).length) {
@@ -59,6 +63,23 @@ const BoardPage = () => {
                             }
 
                         </div>
+                    ))
+                }
+            </div>
+            <div className={s.playerTwo}>
+                {
+                    player2.map(({ id, type, values, name, img}) => (
+                        <Cards
+                            className={s.card}
+                            key={id}
+                            id={id}
+                            type={type}
+                            values={values}
+                            name={name}
+                            img={img}
+                            isActive
+                            minimize={true}
+                        />
                     ))
                 }
             </div>
