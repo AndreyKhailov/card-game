@@ -11,8 +11,6 @@ function App() {
   const location = useLocation();
   const isPadding = location.pathname === '/' || location.pathname === '/game/board';
 
-  console.log('location', location);
-
   return (
     <Switch>
       <Route path='/404' component={NotFound} />

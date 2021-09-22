@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router';
 
 import { CardsContext } from '../../../../context/cardsContext';
 
@@ -8,6 +9,11 @@ import s from './boardPage.module.css';
 
 const BoardPage = () => {
     const { selectedCards } = useContext(CardsContext);
+    const history = useHistory();
+
+    if(!Object.keys(selectedCards).length) {
+        history.replace('/game');
+    };
 
     return (
         <div className={s.root}>
