@@ -1,79 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { StartPage, BoardPage, FinishPage } from './routes';
 
-import { Cards } from '../../components';
+import { FireBaseContext } from '../../context/fireBaseContext';
+import { CardsContext } from '../../context/cardsContext';
+import FireBase from '../../service/firebaseInit';
 
-import fireDB from '../../service/firebaseInit';
+const GamePage = () => {
+    const [selectedCards, setSelectedCards] = useState({});
 
-import s from './game.module.css';
+    const match = useRouteMatch();
 
-
-function Game() {
-    const [cards, setCards] = useState({});
-    const history = useHistory();
-
-    const getCards = () => {
-        fireDB.child('cards').once('value', (snapshot) => setCards(snapshot.val()))
-    };
-
-    useEffect(() => {
-        getCards();
-    }, []);
-
-    const onClickGoToHome = () => {
-        history.push('/');
-    };
-
-    const onClickIsActiveCard = (id, objID) => {
-        setCards(prevState => {
-            return Object.entries(prevState).reduce((acc, item) => {
-                const card = {...item[1]};
-                if (card.id === id) {
-                    card.isActive = !card.isActive;
-                    fireDB.child('cards/' + objID).update({isActive: card.isActive}).then(() => getCards());
-                };
-                
-                acc[item[0]] = card;
-        
-                return acc;
-            }, {});
+    const onHandleSelectedCards = (key, card) => {
+        setSelectedCards(prevState => {
+            if(prevState[key]) {
+                const copyState = {...prevState};
+                delete copyState[key];
+                return copyState;
+            };
+            return {
+                ...prevState,
+                [key]: card,
+            };
         });
     };
 
-    const onClickAddCard = () => {
-        const data = Object.values(cards)[1];
-        const newKey = fireDB.child('cards').push().key;
-        fireDB.child('cards/' + newKey).set(data).then(() => getCards());
+    const dataCardsContext = {
+        selectedCards, 
+        onSelectedCards: onHandleSelectedCards,
     };
-    
-    return (
-        <div className={s.game}>
-            <h1>This is start game</h1>
-            <button className={s.addCardbtn} onClick={onClickAddCard}>add card</button>
-            <div className={s.flex}>
-                {
-                    Object.entries(cards).map(([key, {id, type, values, name, img, isActive}]) => (
-                        <Cards
-                            key={key}
-                            id={id}
-                            objID={key}
-                            type={type}
-                            values={values}
-                            name={name}
-                            img={img}
-                            activeCard={isActive}
-                            onClickCard={onClickIsActiveCard}
-                        />
-                    ))
-                }
-        </div>
-            <button 
-                onClick={onClickGoToHome}
-            >
-                Home
-            </button>
-        </div>
-    )
-}
 
-export default Game;
+    return (
+        <FireBaseContext.Provider value={ new FireBase() }>
+            <CardsContext.Provider value={ dataCardsContext }>
+                <Switch>
+                    <Route path={`${match.path}/`} exact component={StartPage} />
+                    <Route path={`${match.path}/board`} component={BoardPage} />
+                    <Route path={`${match.path}/finish`} component={FinishPage} />
+                </Switch>
+            </CardsContext.Provider>
+        </FireBaseContext.Provider>
+    );
+};
+
+export default GamePage;
