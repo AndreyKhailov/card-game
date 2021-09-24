@@ -9,6 +9,9 @@ import FireBase from '../../service/firebaseInit';
 const GamePage = () => {
     const [selectedCards, setSelectedCards] = useState({});
 
+    const [playerCards1, setPlayerCards1] = useState({});
+    const [playerCards2, setPlayerCards2] = useState([]);
+
     const match = useRouteMatch();
 
     const onHandleSelectedCards = (key, card) => {
@@ -25,9 +28,18 @@ const GamePage = () => {
         });
     };
 
+    const cleanCards = () => {
+        setPlayerCards1({});
+        setPlayerCards2([]);
+    };
+
     const dataCardsContext = {
-        selectedCards, 
+        selectedCards,
+        playerCards1,
+        playerCards2,
         onSelectedCards: onHandleSelectedCards,
+        clean: cleanCards,
+
     };
 
     return (

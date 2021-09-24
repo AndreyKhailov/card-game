@@ -1,9 +1,16 @@
 import s from './finishPage.module.css';
 
 function FinishPage() {
+    
     return (
         <div className={s.root}>
-            <h1>Finish Game</h1>
+            <div className={s.player1}>
+
+            </div>
+            <button >end game</button>
+            <div className={s.player2}>
+
+            </div>
         </div>
     )
 }
