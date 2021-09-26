@@ -45,7 +45,7 @@ function StartPage() {
         history.push('/game/board');
     };
 
-    const checkingNumOfCards = Object.keys(cardsContext.selectedCards).length < 5;
+    const checkingNumOfCards = Object.keys(cardsContext.playerCards1).length < 5;
     
     return (
         <div>

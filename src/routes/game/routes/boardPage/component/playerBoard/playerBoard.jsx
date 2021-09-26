@@ -5,22 +5,24 @@ import { Cards } from '../../../../../../components';
 
 import s from './playerBoard.module.css';
 
-function PlayerBoard({ player, cards, onClickCard }) {
+function PlayerBoard({ turn, player, cards, onClickCard }) {
     const [isSelected, setSelected] = useState(null);
 
     return (
         <>
             {
-                cards.map((item) => (
-                    <div key={item.id} className={cn(s.cardBoard, {
+                cards.map((item, index) => (
+                    <div key={`${item.id}_${index}`} className={cn(s.cardBoard, {
                         [s.selected]: isSelected === item.id
                     })}
                         onClick={() => {
-                            setSelected(item.id);
-                            onClickCard && onClickCard({
-                                player,
-                                ...item,
-                            });
+                            if(turn === player) {
+                                setSelected(item.id);
+                                onClickCard && onClickCard({
+                                    player,
+                                    ...item,
+                                });
+                            }
                         }}
                     >
                         <Cards

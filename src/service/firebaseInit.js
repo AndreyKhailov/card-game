@@ -24,11 +24,25 @@ class FireBase {
     this.fire = firebase;
     this.database = this.fire.database();
   }
+
+  getCardSoket = (cb) => {
+    this.database.ref('cards').on('value', (snapshot) => cb(snapshot.val()));
+  };
+
   getCardsOnce = async () => {
     return await this.database
       .ref('cards')
       .once('value')
       .then((snapshot) => snapshot.val());
+  };
+
+  offCardsOnce = () => {
+    this.database.ref('cards').off();
+  };
+
+  setCard = (card) => {
+    const newKey = this.database.ref().child('pokemons').push().key;
+    this.database.ref('cards/' + newKey).set(card);
   };
 }
 
