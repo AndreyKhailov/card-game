@@ -1,0 +1,41 @@
+.root {
+  display: grid;
+  place-items: center;
+  grid-template-rows: auto 1fr auto;
+  gap: 25px;
+}
+
+.player1,
+.player2 {
+  display: flex;
+}
+
+.card {
+  width: 200px;
+  height: 300px;
+}
+
+.card:not(:last-child) {
+  margin-right: 15px;
+}
+
+.btn {
+  width: 160px;
+  padding: 18px 28px;
+  background: #f300b4 linear-gradient(hsla(0, 0%, 100%, 0.2), transparent);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  color: #fafafa;
+  text-shadow: 0 -2px 3px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.desable {
+  opacity: 0.5;
+}
