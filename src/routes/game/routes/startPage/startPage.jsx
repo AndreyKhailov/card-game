@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector} from 'react-redux';
 
 import { Cards } from '../../../../components';
 
 import { FireBaseContext } from '../../../../context/fireBaseContext';
 import { CardsContext } from '../../../../context/cardsContext';
+import { selectCardsData } from '../../../../store/cards';
 
 import s from './startPage.module.css';
 
 function StartPage() {
     const firebase = useContext(FireBaseContext);
     const cardsContext = useContext(CardsContext);
+    const cardsRedux = useSelector(selectCardsData);
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const [cards, setCards] = useState({});
