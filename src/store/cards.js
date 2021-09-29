@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import FireBaseClass from '../service/firebaseInit';
+
 export const slice = createSlice({
   name: 'cards',
   initialState: {
@@ -24,7 +26,8 @@ export const slice = createSlice({
       data: action.payload,
       error: action.payload,
     }),
-    handleselectedCards: (state, { payload: { card, key } }) => {
+    // { payload: { card, key } }
+    handleSelectedCards: (state, { payload: { card, key } }) => {
       const newCards = { ...state.selectedCards };
       if (newCards[key]) {
         delete newCards[key];
@@ -37,17 +40,20 @@ export const slice = createSlice({
       ...state,
       data: {},
     }),
-
-    // getCards: (state, action) => ({
-    //   ...state,
-    //   data: action.payload,
-    // }),
   },
 });
 
-export const { getCards } = slice.actions;
+export const { fetchCards, fetchCardsResolve, fetchCardsReject, handleSelectedCards, cleanCards } =
+  slice.actions;
 
 export const selectCardsLoading = (state) => state.cards.isLoading;
 export const selectCardsData = (state) => state.cards.data;
+export const selectedCards = (state) => state.cards.selectedCards;
+
+export const getCardsAsync = () => async (dispatch) => {
+  dispatch(fetchCards());
+  const data = await FireBaseClass.getCardsOnce();
+  dispatch(fetchCardsResolve(data));
+};
 
 export default slice.reducer;
