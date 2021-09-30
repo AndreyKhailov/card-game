@@ -41,6 +41,10 @@ export const slice = createSlice({
     cleanCards: (state) => ({
       ...state,
       data: {},
+      selectedCards: {},
+      player2: [],
+      board: [],
+      choiceCard: [],
     }),
     addNewCard: (state, action) => ({
       ...state,

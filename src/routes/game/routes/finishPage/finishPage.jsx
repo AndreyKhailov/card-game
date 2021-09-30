@@ -1,18 +1,23 @@
-import { useContext } from 'react';
+// import { useContext } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { FireBaseContext } from '../../../../context/fireBaseContext';
-import { CardsContext } from '../../../../context/cardsContext';
-
+import { selectedCards, cardsOfPlayer2, cleanCards, addCardsAsync } from '../../../../store/cards';
 import { Cards } from '../../../../components';
 
 import s from './finishPage.module.css';
 
 function FinishPage() {
     const history = useHistory();
-    const firebase = useContext(FireBaseContext);
-    const { playerCards1, playerCards2, setPlayerCards2, onClean } = useContext(CardsContext);
+    
+    const dispatch = useDispatch();
+    
+    const playerCards1 = useSelector(selectedCards);
+    const player2 = useSelector(cardsOfPlayer2);
+    
+    const [playerCards2, setPlayerCards2] = useState(player2);
 
     const onSelectedCard = (id) => {
         setPlayerCards2(prevState => (
@@ -29,8 +34,8 @@ function FinishPage() {
     const addWinCard = () => {
         if(findIsSelectedCard) {
             findIsSelectedCard.isSelected = false
-            findIsSelectedCard && firebase.setCard(findIsSelectedCard);
-            onClean();
+            dispatch(addCardsAsync(findIsSelectedCard));
+            dispatch(cleanCards());
             history.replace('/game');
         }
     };
