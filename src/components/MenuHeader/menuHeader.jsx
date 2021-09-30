@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import { Menu, NavBar } from "./";
-import { Modal } from "../";
+import { Modal, LoginForm } from "../";
 
 function MenuHeader({ bgActive }) {
 
@@ -14,6 +14,10 @@ function MenuHeader({ bgActive }) {
 
     const handleClickModal = () => {
         setOpenModal(prevState => !prevState);
+    };
+
+    const handleSubmitForm = (e) => {
+        console.log('####', e)
     };
 
     return (
@@ -33,7 +37,9 @@ function MenuHeader({ bgActive }) {
                 onCloseModal={handleClickModal}
                 title='Login'
             >
-                input form
+                <LoginForm 
+                    onSubmit={handleSubmitForm}
+                />
             </Modal>
         </>
     )

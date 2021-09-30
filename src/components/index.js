@@ -4,3 +4,4 @@ export { default as Layout } from './layout/layout';
 export { default as Cards } from './cards/cards';
 export { default as Footer } from './footer/footer';
 export { default as Modal } from './modal/modal';
+export { default as LoginForm } from './loginForm/loginForm';
