@@ -23,8 +23,9 @@ const MENU = [
 ];
 
 function Menu({ activeMenu, closeMenu }) {
+    
     const onCloseMenu = () => {
-        closeMenu();
+        onCloseMenu && closeMenu();
     };
 
     return (
