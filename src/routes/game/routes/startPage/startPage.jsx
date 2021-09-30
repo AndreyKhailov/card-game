@@ -1,51 +1,51 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Cards } from '../../../../components';
 
-import { FireBaseContext } from '../../../../context/fireBaseContext';
-import { CardsContext } from '../../../../context/cardsContext';
+import { getCardsAsync, selectCardsData, selectCardsLoading, selectedCards, handleSelectedCards } from '../../../../store/cards';
 
 import s from './startPage.module.css';
 
 function StartPage() {
-    const firebase = useContext(FireBaseContext);
-    const cardsContext = useContext(CardsContext);
+    const isLoading = useSelector(selectCardsLoading);
+    const cardsRedux = useSelector(selectCardsData);
+    const selected = useSelector(selectedCards);
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const [cards, setCards] = useState({});
 
-    const getCards = async() => {
-        const response = await firebase.getCardsOnce();
-        setCards(response);
-    };
-
     useEffect(() => {
-        getCards();
+        dispatch(getCardsAsync());
     }, []);
 
-    
+    useEffect(() => {
+        setCards(cardsRedux);
+    }, [cardsRedux]);
+
     const onClickGoToHome = () => {
         history.push('/');
     };
 
     const handleChangeSelected = (key) => {
-        const card = {...cards[key]};
-        cardsContext.onSelectedCards(key, card);
+        const card = {...cards[key]}
+        dispatch(handleSelectedCards({card, key}))
+
         setCards(prevState => ({
             ...prevState,
             [key]: {
                 ...prevState[key],
                 isSelected: !prevState[key].isSelected,
             }
-        }))
+        }));
     };
-
     const onClickGoToGamePage = () => {
         history.push('/game/board');
     };
 
-    const checkingNumOfCards = Object.keys(cardsContext.playerCards1).length < 5;
+    const checkingNumOfCards = Object.keys(selected).length < 5;
     
     return (
         <div>

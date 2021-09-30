@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router';
 
-import { CardsContext } from '../../../../context/cardsContext';
+import { selectedCards, getPlayer2CardsAsync, boarding, cardsOfPlayer2, choiceCardAsync, choiceCardRequest } from '../../../../store/cards';
 
 import { Cards } from '../../../../components';
 import PlayerBoard from './component/playerBoard/playerBoard';
@@ -11,13 +12,13 @@ import s from './boardPage.module.css';
 const counterWin = (board, player1, player2) => {
     let player1Count = player1.length;
     let player2Count = player2.length;
-    
+
     board.forEach(item => {
-        if(item.card.possession === 'red') {
+        if(item.card && item.card.possession === 'red') {
             player2Count++;
         };
 
-        if(item.card.possession === 'blue') {
+        if(item.card && item.card.possession === 'blue') {
             player1Count++;
         };
     });
@@ -26,10 +27,17 @@ const counterWin = (board, player1, player2) => {
 
 const BoardPage = () => {
     const history = useHistory();
-    const playersCardsContext = useContext(CardsContext);
-    const [board, setBoard] = useState([]);
+
+    const dispatch = useDispatch();
+
+    const player1Cards = useSelector(selectedCards);
+    const player2Cards = useSelector(cardsOfPlayer2);
+    const getBoardPlate = useSelector(boarding);
+    const choiceCardReq = useSelector(choiceCardRequest);
+
+    const [board, setBoard] = useState(getBoardPlate);
     const [player1, setPlayer1] = useState(() => {
-        return Object.values(playersCardsContext.playerCards1).map((item) => ({
+        return Object.values(player1Cards).map((item) => ({
             ...item,
             possession: 'blue',
         }))
@@ -41,30 +49,22 @@ const BoardPage = () => {
     const [turn, setTurn] = useState(1);
 
     useEffect(() => {
-        async function fetch() {
-            const boardResponse = await fetch('https://reactmarathon-api.netlify.app/api/board');
-            const boardRequest = await boardResponse.json();
-            setBoard(boardRequest.data);
-    
-            const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
-            const player2Request = await player2Response.json();
-            setPlayer2(() => {
-                return player2Request.data.map((item) => ({
-                    ...item,
-                    possession: 'red',
-                }))
-            });
-        };
-        fetch();
+        dispatch(getPlayer2CardsAsync());
     }, []);
 
     useEffect(() => {
-        if(player2.length === 5) {
-            playersCardsContext.setPlayerCards2(player2);
-        };
-    }, [player2]);
+        player2Cards.length && setPlayer2(player2Cards);
+    }, [player2Cards]);
 
-    if(!Object.keys(playersCardsContext.playerCards1).length) {
+    useEffect(() => {
+        choiceCardReq.length && setBoard(choiceCardReq);
+    }, [choiceCardReq]);
+
+    useEffect(() => {
+        getBoardPlate.length && setBoard(getBoardPlate);
+    }, [getBoardPlate]);
+
+    if(!Object.keys(player1Cards).length) {
         history.replace('/game');
     };
 
@@ -75,15 +75,8 @@ const BoardPage = () => {
                 card: choiceCard,
                 board,
             };
-            const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(params),
-            });
             
-            const request = await res.json();
+            dispatch(choiceCardAsync(params));
             
             if(choiceCard.player === 1) {
                 setPlayer1(prevState => prevState.filter(item => item.id !== choiceCard.id));
@@ -95,7 +88,6 @@ const BoardPage = () => {
                 setTurn((prev) => prev - 1)
             };
 
-            setBoard(request.data);
             setSteps(prevState => {
                 const count = prevState + 1;
                 return count;
