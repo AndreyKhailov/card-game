@@ -16,8 +16,19 @@ function MenuHeader({ bgActive }) {
         setOpenModal(prevState => !prevState);
     };
 
-    const handleSubmitForm = (e) => {
-        console.log('####', e)
+    const handleSubmitForm = async ({ email, password }) => {
+        const requestOptions = {
+            method: "POST",
+            body: JSON.stringify({
+                email,
+                password,
+                returnSecureToken: true,
+            }),
+        };
+        
+        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU', requestOptions).then(res => res.json());
+
+        console.log('responce', responce)
     };
 
     return (
