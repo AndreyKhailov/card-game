@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { NotificationManager } from 'react-notifications';
 
 import { Menu, NavBar } from "./";
 import { Modal, LoginForm } from "../";
@@ -25,10 +26,14 @@ function MenuHeader({ bgActive }) {
                 returnSecureToken: true,
             }),
         };
-        
-        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU', requestOptions).then(res => res.json());
 
-        console.log('responce', responce)
+        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU', requestOptions).then(res => res.json());
+        
+        if (responce.hasOwnProperty('error')) {
+            NotificationManager.error(responce.error.message, 'title')
+        } else {
+            NotificationManager.success('success', 'title')
+        };
     };
 
     return (
