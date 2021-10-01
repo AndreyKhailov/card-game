@@ -84,6 +84,22 @@
   animation: inputHighlighter 0.3s ease;
 }
 
+.form_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reg_btn {
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.reg_btn:hover {
+  color: #f300b4;
+}
+
 @-webkit-keyframes inputHighlighter {
   from {
     background: #f300b4;

@@ -5,3 +5,5 @@ export { default as Cards } from './cards/cards';
 export { default as Footer } from './footer/footer';
 export { default as Modal } from './modal/modal';
 export { default as LoginForm } from './loginForm/loginForm';
+export { default as ExitForm } from './exitForm/exitForm';
+export { default as PrivateRoute } from './privateRoute/privateRoute';

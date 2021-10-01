@@ -1,7 +1,7 @@
 import { useLocation, Redirect, Route, Switch } from 'react-router';
 import { NotificationContainer } from 'react-notifications';
 
-import { MenuHeader, Footer } from './components';
+import { MenuHeader, Footer, PrivateRoute } from './components';
 import { Home, Game, About, Contacts, NotFound } from './routes';
 
 import s from './app.module.css';
@@ -22,8 +22,8 @@ function App() {
             <div className={cn(s.wrap, { [s.isHomePage]: isPadding })}>
               <Switch>
                 <Route path='/' exact component={Home} />
-                <Route path='/game' component={Game} />
-                <Route path='/about' component={About} />
+                <PrivateRoute path='/game' component={Game} />
+                <PrivateRoute path='/about' component={About} />
                 <Route path='/contacts' component={Contacts} />
                 <Route render={() => <Redirect to='404' />} />
               </Switch>

@@ -1,13 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { NotificationManager } from 'react-notifications';
 
 import { Menu, NavBar } from "./";
-import { Modal, LoginForm } from "../";
+import { Modal, LoginForm, ExitForm } from "../";
+
+import { submitForm, error, success, auth, exitLogin } from '../../store/login';
 
 function MenuHeader({ bgActive }) {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const successResponse = useSelector(success);
+    const errorResponse = useSelector(error);
+    const isAuth = useSelector(auth);
 
     const [activeMenu, setActiveMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(false);
+
+    useEffect(() => {
+        errorResponse 
+            && NotificationManager.error(errorResponse, 'title');
+        
+        successResponse
+            && handleClickModal()
+            && NotificationManager.success('success', 'title')
+    }, [errorResponse, successResponse]);
 
     const handleButtonMenu = () => {
         setActiveMenu(prevState => !prevState);
@@ -17,23 +35,14 @@ function MenuHeader({ bgActive }) {
         setOpenModal(prevState => !prevState);
     };
 
-    const handleSubmitForm = async ({ email, password }) => {
-        const requestOptions = {
-            method: "POST",
-            body: JSON.stringify({
-                email,
-                password,
-                returnSecureToken: true,
-            }),
-        };
+    const handleSubmitForm = ({ email, password, isSignIn }) => {
+        dispatch(submitForm({ email, password, isSignIn }))
+    };
 
-        const responce = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU', requestOptions).then(res => res.json());
-        
-        if (responce.hasOwnProperty('error')) {
-            NotificationManager.error(responce.error.message, 'title')
-        } else {
-            NotificationManager.success('success', 'title')
-        };
+    const handleExitLogin = () => {
+        dispatch(exitLogin());
+        handleClickModal();
+        history.push('/');
     };
 
     return (
@@ -51,11 +60,15 @@ function MenuHeader({ bgActive }) {
             <Modal
                 isOpen={isOpenModal}
                 onCloseModal={handleClickModal}
-                title='Login'
+                title='Auth...'
             >
-                <LoginForm 
-                    onSubmit={handleSubmitForm}
-                />
+                { !isAuth 
+                    ? <LoginForm onSubmit={handleSubmitForm} />
+                    : <ExitForm 
+                        onCloseModal={handleClickModal}
+                        onExitLogin={handleExitLogin}
+                    />
+                }
             </Modal>
         </>
     )
