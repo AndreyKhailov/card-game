@@ -1,10 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {selectUser} from '../../store/user';
+import { selectUser } from '../../store/user';
+import { exitLogin } from '../../store/login';
 
 function User() {
-    const userData = useSelector(selectUser)
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const userData = useSelector(selectUser);
+
+    const onClickExitLogin = () => {
+        dispatch(exitLogin());
+        history.push('/');
+    };
 
     return (
         <div>
@@ -13,7 +22,9 @@ function User() {
                 <email>email: {userData.email}</email>
                 <p>Последнее обновление: {userData.lastRefreshAt}</p>
             </div>
-            
+            <button onClick={onClickExitLogin}>
+                Выйти
+            </button>
         </div>
     )
 }

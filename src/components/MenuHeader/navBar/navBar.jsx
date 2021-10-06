@@ -37,7 +37,7 @@ function NavBar({ activeMenu, bgActive = false, onChangeActive, onClickLogin }) 
                     {(!isLoadingUser && localID) && (
                         <Link 
                             className={s.loginWrap}
-                            to="/login"
+                            to="/user"
                         >
                             <UserSVG />
                         </Link>

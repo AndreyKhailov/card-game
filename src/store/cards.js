@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// import FireBaseClass from '../service/firebaseInit';
 import { selectLocalID } from './user';
 
 export const slice = createSlice({
