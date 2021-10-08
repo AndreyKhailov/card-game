@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import FireBaseClass from '../service/firebaseInit';
+import { selectLocalID } from './user';
 
 export const slice = createSlice({
   name: 'cards',
@@ -46,11 +46,6 @@ export const slice = createSlice({
       board: [],
       choiceCard: [],
     }),
-    addNewCard: (state, action) => ({
-      ...state,
-      ...state.data,
-      data: action.payload,
-    }),
     setBoard: (state, action) => ({
       ...state,
       ...state.board,
@@ -78,7 +73,6 @@ export const {
   handleSelectedCards,
   setPlayer2,
   setBoard,
-  addNewCard,
   cleanCards,
   choiceCard,
 } = slice.actions;
@@ -90,9 +84,12 @@ export const boarding = (state) => state.cards.board;
 export const cardsOfPlayer2 = (state) => state.cards.player2;
 export const choiceCardRequest = (state) => state.cards.choiceCard;
 
-export const getCardsAsync = () => async (dispatch) => {
+export const getCardsAsync = () => async (dispatch, getState) => {
+  const localId = selectLocalID(getState());
   dispatch(fetchCards());
-  const data = await FireBaseClass.getCardsOnce();
+  const data = await fetch(
+    `https://card-game-edbf6-default-rtdb.firebaseio.com/${localId}/cards.json`,
+  ).then((res) => res.json());
   dispatch(fetchCardsResolve(data));
 };
 
@@ -119,8 +116,16 @@ export const choiceCardAsync = (params) => async (dispatch) => {
   dispatch(choiceCard(request.data));
 };
 
-export const addCardsAsync = (card) => (dispatch) => {
-  FireBaseClass.setCard(card, () => dispatch(addNewCard(card)));
+export const addCardsAsync = (card) => async (dispatch, getState) => {
+  const localId = selectLocalID(getState());
+  const data = await fetch(
+    `https://card-game-edbf6-default-rtdb.firebaseio.com/${localId}/cards.json`,
+    {
+      method: 'POST',
+      body: JSON.stringify(card),
+    },
+  ).then((res) => res.json());
+  console.log('addCard', data);
 };
 
 export default slice.reducer;

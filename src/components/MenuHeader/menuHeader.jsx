@@ -13,7 +13,7 @@ function MenuHeader({ bgActive }) {
     const dispatch = useDispatch();
     const successResponse = useSelector(success);
     const errorResponse = useSelector(error);
-    const isAuth = useSelector(auth);
+    // const isAuth = useSelector(auth);
 
     const [activeMenu, setActiveMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(false);
@@ -39,11 +39,11 @@ function MenuHeader({ bgActive }) {
         dispatch(submitForm({ email, password, isSignIn }))
     };
 
-    const handleExitLogin = () => {
-        dispatch(exitLogin());
-        handleClickModal();
-        history.push('/');
-    };
+    // const handleExitLogin = () => {
+    //     dispatch(exitLogin());
+    //     handleClickModal();
+    //     history.push('/');
+    // };
 
     return (
         <>
@@ -62,13 +62,13 @@ function MenuHeader({ bgActive }) {
                 onCloseModal={handleClickModal}
                 title='Auth...'
             >
-                { !isAuth 
-                    ? <LoginForm onSubmit={handleSubmitForm} />
+                {/* { !isAuth  ? <LoginForm onSubmit={handleSubmitForm} />
                     : <ExitForm 
                         onCloseModal={handleClickModal}
                         onExitLogin={handleExitLogin}
                     />
-                }
+                } */}
+                <LoginForm onSubmit={handleSubmitForm} />
             </Modal>
         </>
     )
