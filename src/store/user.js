@@ -37,7 +37,7 @@ export const getUserUpdateAsync = () => async (dispatch) => {
       }),
     };
     const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU',
+      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M',
       requestOptions,
     ).then((res) => res.json());
     if (response.hasOwnProperty('error')) {

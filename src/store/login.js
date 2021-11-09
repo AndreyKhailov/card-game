@@ -50,8 +50,8 @@ export const submitForm =
 
     const response = await fetch(
       isSignIn
-        ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU'
-        : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7NgFky_QwA2UvwovY0Dry1qg1NjtoTuU',
+        ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M'
+        : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M',
       requestOptions,
     ).then((res) => res.json());
 
@@ -67,7 +67,7 @@ export const submitForm =
 
         for (const item of cardsStart.data) {
           await fetch(
-            `https://card-game-edbf6-default-rtdb.firebaseio.com/${response.localId}/cards.json?auth=${response.idToken}`,
+            `https://card-game-fa17c-default-rtdb.firebaseio.com/${response.localId}/cards.json?auth=${response.idToken}`,
             {
               method: 'POST',
               body: JSON.stringify(item),

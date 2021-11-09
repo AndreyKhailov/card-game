@@ -88,7 +88,7 @@ export const getCardsAsync = () => async (dispatch, getState) => {
   const localId = selectLocalID(getState());
   dispatch(fetchCards());
   const data = await fetch(
-    `https://card-game-edbf6-default-rtdb.firebaseio.com/${localId}/cards.json`,
+    `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
   ).then((res) => res.json());
   dispatch(fetchCardsResolve(data));
 };
@@ -119,7 +119,7 @@ export const choiceCardAsync = (params) => async (dispatch) => {
 export const addCardsAsync = (card) => async (dispatch, getState) => {
   const localId = selectLocalID(getState());
   const data = await fetch(
-    `https://card-game-edbf6-default-rtdb.firebaseio.com/${localId}/cards.json`,
+    `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
     {
       method: 'POST',
       body: JSON.stringify(card),
