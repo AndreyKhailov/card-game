@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import FireBaseClass from '../service/firebaseInit';
 import { selectLocalID } from './user';
 
 export const slice = createSlice({
@@ -26,7 +27,7 @@ export const slice = createSlice({
     fetchCardsReject: (state, action) => ({
       ...state,
       isLoading: false,
-      data: action.payload,
+      data: {},
       error: action.payload,
     }),
     handleSelectedCards: (state, { payload: { card, key } }) => {
@@ -86,10 +87,9 @@ export const choiceCardRequest = (state) => state.cards.choiceCard;
 
 export const getCardsAsync = () => async (dispatch, getState) => {
   const localId = selectLocalID(getState());
+  FireBaseClass.setLocalID(localId);
   dispatch(fetchCards());
-  const data = await fetch(
-    `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
-  ).then((res) => res.json());
+  const data = await FireBaseClass.getCards();
   dispatch(fetchCardsResolve(data));
 };
 
@@ -116,16 +116,16 @@ export const choiceCardAsync = (params) => async (dispatch) => {
   dispatch(choiceCard(request.data));
 };
 
-export const addCardsAsync = (card) => async (dispatch, getState) => {
-  const localId = selectLocalID(getState());
-  const data = await fetch(
-    `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
-    {
-      method: 'POST',
-      body: JSON.stringify(card),
-    },
-  ).then((res) => res.json());
-  console.log('addCard', data);
+export const addCardsAsync = (card) => async () => {
+  // const localId = selectLocalID(getState());
+  // const data = await fetch(
+  //   `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
+  //   {
+  //     method: 'POST',
+  //     body: JSON.stringify(card),
+  //   },
+  // ).then((res) => res.json());
+  await FireBaseClass.addCard(card);
 };
 
 export default slice.reducer;

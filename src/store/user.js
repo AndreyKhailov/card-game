@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import FireBaseClass from '../service/firebaseInit';
 
 export const slice = createSlice({
   name: 'user',
@@ -28,7 +29,7 @@ export const selectUser = (state) => state.user.data;
 export const selectLocalID = (state) => state.user.data?.localId;
 
 export const getUserUpdateAsync = () => async (dispatch) => {
-  const idToken = localStorage.getItem('idToken');
+  const idToken = FireBaseClass.token();
   if (idToken) {
     const requestOptions = {
       method: 'POST',

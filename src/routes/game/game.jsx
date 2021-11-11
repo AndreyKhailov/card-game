@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import { StartPage, BoardPage, FinishPage } from './routes';
 
 const GamePage = () => {
-    const [playerCards1, setPlayerCards1] = useState({});
-    const [playerCards2, setPlayerCards2] = useState([]);
-
     const match = useRouteMatch();
 
     return (
