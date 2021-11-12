@@ -117,14 +117,6 @@ export const choiceCardAsync = (params) => async (dispatch) => {
 };
 
 export const addCardsAsync = (card) => async () => {
-  // const localId = selectLocalID(getState());
-  // const data = await fetch(
-  //   `https://card-game-fa17c-default-rtdb.firebaseio.com/${localId}/cards.json`,
-  //   {
-  //     method: 'POST',
-  //     body: JSON.stringify(card),
-  //   },
-  // ).then((res) => res.json());
   await FireBaseClass.addCard(card);
 };
 

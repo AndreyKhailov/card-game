@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import FireBaseClass from '../service/firebaseInit';
 import { getUserUpdateAsync } from './user';
+import { SIGN_IN, SIGN_OUT } from './constants';
 
 export const slice = createSlice({
   name: 'login',
@@ -49,12 +50,9 @@ export const submitForm =
       }),
     };
 
-    const response = await fetch(
-      isSignIn
-        ? 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M'
-        : 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M',
-      requestOptions,
-    ).then((res) => res.json());
+    const response = await fetch(isSignIn ? SIGN_IN : SIGN_OUT, requestOptions).then((res) =>
+      res.json(),
+    );
 
     dispatch(clearRes());
 

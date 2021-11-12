@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import FireBaseClass from '../service/firebaseInit';
+
+import { SIGN_AUTH } from './constants';
 
 export const slice = createSlice({
   name: 'user',
@@ -37,10 +40,7 @@ export const getUserUpdateAsync = () => async (dispatch) => {
         idToken,
       }),
     };
-    const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDm4z0DkOngj0-PF71e8qrXRW8slfYpW4M',
-      requestOptions,
-    ).then((res) => res.json());
+    const response = await fetch(SIGN_AUTH, requestOptions).then((res) => res.json());
     if (response.hasOwnProperty('error')) {
       localStorage.removeItem('idToken');
       dispatch(removeUser());
