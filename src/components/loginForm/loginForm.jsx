@@ -17,9 +17,7 @@ function LoginForm({ onSubmit }) {
         setPassword('');
     };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-
+    const handleLogin = () => {
         setSignIn(prevState => !prevState);
     };
 

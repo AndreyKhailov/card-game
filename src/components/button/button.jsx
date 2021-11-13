@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import s from './button.module.css';
 
-function Button({onClick = () => {}, isDisabled=false, children}) {
+function Button({onClick = f => f, isDisabled=false, children}) {
 
     return (
         <button 
