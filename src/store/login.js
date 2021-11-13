@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import FireBaseClass from '../service/firebaseInit';
+import request from '../service/request';
 import { getUserUpdateAsync } from './user';
 import { SIGN_IN, SIGN_UP } from './constants';
 
@@ -53,7 +54,7 @@ export const submitForm =
     const response = await fetch(isSignIn ? SIGN_IN : SIGN_UP, requestOptions).then((res) =>
       res.json(),
     );
-    console.log('response', response);
+
     dispatch(clearRes());
 
     if (response.hasOwnProperty('error')) {
@@ -63,9 +64,7 @@ export const submitForm =
       if (!isSignIn) {
         FireBaseClass.setLocalID(response.localId);
 
-        const cardsStart = await fetch(
-          'https://reactmarathon-api.herokuapp.com/api/pokemons/starter',
-        ).then((res) => res.json());
+        const cardsStart = await request.getStarterKit();
 
         for (const item of cardsStart.data) {
           await FireBaseClass.addCard(item);
@@ -77,7 +76,7 @@ export const submitForm =
     }
   };
 
-export const exitLogin = () => (dispatch) => {
+export const logout = () => (dispatch) => {
   localStorage.removeItem('idToken');
   dispatch(authentification(false));
 };

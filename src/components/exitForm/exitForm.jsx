@@ -1,13 +1,13 @@
 import s from './exitForm.module.css';
 
-function ExitForm({ onCloseModal, onExitLogin }) {
+function ExitForm({ onCloseModal, onLogout }) {
 
     const handleCloseModal = () => {
         onCloseModal && onCloseModal();
     };
 
     const handleExitLog = () => {
-        onExitLogin && onExitLogin();
+        onLogout && onLogout();
     };
 
     return (

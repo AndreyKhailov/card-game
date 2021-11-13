@@ -3,26 +3,28 @@ import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUser } from '../../store/user';
-import { exitLogin } from '../../store/login';
+import { logout } from '../../store/login';
+
+import s from './user.module.css';
 
 function User() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userData = useSelector(selectUser);
-
-    const onClickExitLogin = () => {
-        dispatch(exitLogin());
+    
+    const onClickLogout = () => {
+        dispatch(logout());
         history.push('/');
     };
 
     return (
-        <div>
-            <h1>Info about user: {userData.email}</h1>
-            <div>
-                <email>email: {userData.email}</email>
+        <div className={s.root}>
+            <h1>Информация о пользователе:</h1>
+            <div className={s.info}>
+                <p>email: {userData.email}</p>
                 <p>Последнее обновление: {userData.lastRefreshAt}</p>
             </div>
-            <button onClick={onClickExitLogin}>
+            <button onClick={onClickLogout}>
                 Выйти
             </button>
         </div>
