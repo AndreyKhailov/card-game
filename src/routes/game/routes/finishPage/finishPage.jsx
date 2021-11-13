@@ -2,10 +2,9 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import cn from 'classnames';
 
 import { selectedCards, cardsOfPlayer2, cleanCards, addCardsAsync } from '../../../../store/cards';
-import { Cards } from '../../../../components';
+import { Cards, Button } from '../../../../components';
 
 import s from './finishPage.module.css';
 
@@ -58,12 +57,12 @@ function FinishPage() {
                     ))
                 }
             </div>
-            <button 
-                className={cn(s.btn, {[s.desable]: !findIsSelectedCard})}
+            <Button 
                 onClick={addWinCard}
+                isDisabled={!findIsSelectedCard}
             >
-                end game
-            </button>
+                Завершить игру
+            </Button>
             <div className={s.player2}>
                 {
                     playerCards2.map(({ id, type, values, name, img, isSelected }, index) => (

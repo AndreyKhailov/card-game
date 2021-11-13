@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../store/user';
 import { logout } from '../../store/login';
 
+import { Button } from '../../components';
+
 import s from './user.module.css';
 
 function User() {
@@ -24,9 +26,9 @@ function User() {
                 <p>email: {userData.email}</p>
                 <p>Последнее обновление: {userData.lastRefreshAt}</p>
             </div>
-            <button onClick={onClickLogout}>
+            <Button onClick={onClickLogout}>
                 Выйти
-            </button>
+            </Button>
         </div>
     )
 }

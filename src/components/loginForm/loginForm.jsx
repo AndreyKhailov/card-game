@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { Button } from '../../components';
+
 import s from './loginForm.module.css';
 
 function LoginForm({ onSubmit }) {
@@ -24,7 +27,7 @@ function LoginForm({ onSubmit }) {
         <form onSubmit={handleSubmit}>
             <div className={s.root}>
                 <input 
-                    type="text" 
+                    type="email" 
                     className={s.input}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -32,11 +35,11 @@ function LoginForm({ onSubmit }) {
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <label className={s.label}>Email</label>
+                <label className={s.label}>e-mail</label>
             </div>
             <div className={s.root}>
                 <input 
-                    type="text" 
+                    type="password" 
                     className={s.input}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -44,17 +47,17 @@ function LoginForm({ onSubmit }) {
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <label className={s.label}>Password</label>
+                <label className={s.label}>Пароль</label>
             </div>
             <div className={s.form_btn}>
-                <button>
-                    { isSignIn ? 'SignIn' : 'SignUp' }
-                </button>
+                <Button>
+                    { isSignIn ? 'Войти' : 'Создать' }
+                </Button>
                 <button 
                     className={s.reg_btn}
                     onClick={(e) => handleLogin(e)}
                 >
-                    { isSignIn ? 'Registration?' : 'Login?' }
+                    { isSignIn ? 'Зарегистрированны?' : 'Есть логин?' }
                 </button>
             </div>
         </form>

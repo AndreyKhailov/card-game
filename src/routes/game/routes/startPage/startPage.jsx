@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Cards } from '../../../../components';
+import { Cards, Button } from '../../../../components';
 
 import { getCardsAsync, selectCardsData, selectCardsLoading, selectedCards, handleSelectedCards } from '../../../../store/cards';
 
@@ -41,6 +41,7 @@ function StartPage() {
             }
         }));
     };
+
     const onClickGoToGamePage = () => {
         history.push('/game/board');
     };
@@ -48,15 +49,14 @@ function StartPage() {
     const checkingNumOfCards = Object.keys(selected).length < 5;
     
     return (
-        <div>
-            <h1>This is start game</h1>
-                <button 
-                    className={s.addCardbtn} 
-                    onClick={ onClickGoToGamePage }
-                    disabled={ checkingNumOfCards }
-                >
-                    start game
-                </button>
+        <div className={s.root}>
+            <p>Выберете ПЯТЬ карт и начинайте игру!</p>
+            <Button 
+                onClick={ onClickGoToGamePage }
+                isDisabled={ checkingNumOfCards }
+            >
+                Начать игру
+            </Button>
             <div className={s.flex}>
                 {
                     Object.entries(cards).map(([key, { id, type, values, name, img, isSelected }]) => (
@@ -79,12 +79,10 @@ function StartPage() {
                         />
                     ))
                 }
-        </div>
-            <button 
-                onClick={onClickGoToHome}
-            >
-                Home
-            </button>
+            </div>
+            <Button onClick={onClickGoToHome}>
+                Назад
+            </Button>
         </div>
     )
 }

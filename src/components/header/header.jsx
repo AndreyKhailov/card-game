@@ -1,5 +1,7 @@
 import { useHistory } from 'react-router';
 
+import { Button } from '../';
+
 import s from './header.module.css';
 
 function Header({ title, desc }) {
@@ -17,11 +19,9 @@ function Header({ title, desc }) {
             <div className={s.container}>
                 <h1>{title}</h1>
                 <p>{desc}</p>
-                <button 
-                    onClick={onClickToStartGame}
-                >
-                    Start Game
-                </button>
+                <Button onClick={onClickToStartGame}>
+                    Начать игру
+                </Button>
             </div>
         </header>
     )

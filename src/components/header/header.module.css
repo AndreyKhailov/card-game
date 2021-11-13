@@ -134,26 +134,8 @@
   font-weight: normal;
   color: #fafafa;
   line-height: 32px;
+  margin-bottom: 28px;
   text-shadow: 0 0 6px #161616;
-}
-
-.container button {
-  padding: 18px 28px;
-  margin-top: 45px;
-  background: #f300b4 linear-gradient(hsla(0, 0%, 100%, 0.2), transparent);
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
-  color: #fafafa;
-  text-shadow: 0 -2px 3px rgba(0, 0, 0, 0.5);
-  font-size: 18px;
-  transition: 0.3s;
-}
-
-.container button:hover {
-  cursor: pointer;
-  background: #fafafa;
-  color: #202736;
 }
 
 @keyframes text-fade-in {

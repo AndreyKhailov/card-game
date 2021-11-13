@@ -1,0 +1,28 @@
+.button {
+  padding: 18px 28px;
+  margin: 15px 5px;
+  background: #2fa50b linear-gradient(hsla(0, 0%, 100%, 0.2), transparent);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
+  color: #fafafa;
+  text-shadow: 0 -2px 3px rgba(0, 0, 0, 0.5);
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: #fafafa;
+  color: #202736;
+}
+
+.disabled {
+  background-color: #a4b99e;
+}
+
+.disabled:hover {
+  background-color: #a4b99e;
+  color: #fafafa;
+  cursor: not-allowed;
+}

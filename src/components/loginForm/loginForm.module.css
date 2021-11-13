@@ -88,10 +88,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0;
 }
 
 .reg_btn {
-  font-size: 14px;
+  font-size: 18px;
   border: none;
   background-color: transparent;
   cursor: pointer;
