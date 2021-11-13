@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import FireBaseClass from '../service/firebaseInit';
 import { getUserUpdateAsync } from './user';
-import { SIGN_IN, SIGN_OUT } from './constants';
+import { SIGN_IN, SIGN_UP } from './constants';
 
 export const slice = createSlice({
   name: 'login',
@@ -50,17 +50,17 @@ export const submitForm =
       }),
     };
 
-    const response = await fetch(isSignIn ? SIGN_IN : SIGN_OUT, requestOptions).then((res) =>
+    const response = await fetch(isSignIn ? SIGN_IN : SIGN_UP, requestOptions).then((res) =>
       res.json(),
     );
-
+    console.log('response', response);
     dispatch(clearRes());
 
     if (response.hasOwnProperty('error')) {
       dispatch(errorRes(response.error.message));
     } else {
+      localStorage.setItem('idToken', response.idToken);
       if (!isSignIn) {
-        localStorage.setItem('idToken', response.idToken);
         FireBaseClass.setLocalID(response.localId);
 
         const cardsStart = await fetch(
