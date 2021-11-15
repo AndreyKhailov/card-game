@@ -1,20 +1,25 @@
 import { useState } from 'react';
 
 import { Button } from '../../components';
+import useInput from './hooks/useInput';
 
 import s from './loginForm.module.css';
 
-function LoginForm({ onSubmit }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+function LoginForm({ onSubmit = f => f }) {
+    const [emailProps, resetEmail] = useInput('');
+    const [passwordProps, resetPassword] = useInput('');
     const [isSignIn, setSignIn] = useState(true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        onSubmit && onSubmit({email, password, isSignIn});
-        setEmail('');
-        setPassword('');
+        
+        onSubmit({
+            email: emailProps.value, 
+            password: passwordProps.value, 
+            isSignIn,
+        });
+        resetEmail('');
+        resetPassword('');
     };
 
     const handleLogin = () => {
@@ -27,8 +32,7 @@ function LoginForm({ onSubmit }) {
                 <input 
                     type="email" 
                     className={s.input}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    {...emailProps}
                     required
                 />
                 <span className={s.highlight}></span>
@@ -39,8 +43,7 @@ function LoginForm({ onSubmit }) {
                 <input 
                     type="password" 
                     className={s.input}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    {...passwordProps}
                     required
                 />
                 <span className={s.highlight}></span>
