@@ -11,6 +11,7 @@
   width: 100%;
   border: none;
   border-bottom: 1px solid #757575;
+  background: #fafafa;
 }
 
 .input:focus {
@@ -18,7 +19,7 @@
 }
 
 .label {
-  color: #999;
+  color: #3d3d3d;
   font-size: 18px;
   font-weight: normal;
   position: absolute;
@@ -99,6 +100,11 @@
 }
 .reg_btn:hover {
   color: #f300b4;
+}
+
+.example {
+  color: #757575;
+  font-size: 12px;
 }
 
 @-webkit-keyframes inputHighlighter {
