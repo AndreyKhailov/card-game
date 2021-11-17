@@ -13,6 +13,7 @@ import s from './navBar.module.css';
 function NavBar({ activeMenu, bgActive = false, onChangeActive, onClickLogin }) {
     const isLoadingUser = useSelector(selectUserLoading);
     const localID = useSelector(selectLocalID);
+    
     const onClickButtonMenu = () => {
         onChangeActive && onChangeActive();
     };

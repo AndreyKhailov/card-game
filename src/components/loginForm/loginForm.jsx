@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { NotificationManager } from 'react-notifications';
 
 import { Button } from '../../components';
 import useInput from './hooks/useInput';
-import userSchema from './validation/userSchema';
 
 import s from './loginForm.module.css';
 
@@ -14,21 +12,14 @@ function LoginForm({ onSubmit = f => f }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const data = {
+        
+        onSubmit && onSubmit({
             email: emailProps.value, 
-            password: passwordProps.value,
-        };
-
-        userSchema.isValid(data).then((valid) => {
-            if (valid) {
-                onSubmit({ ...data, isSignIn });
-                resetEmail('');
-                resetPassword('');
-            } else {
-                NotificationManager.error(valid, 'Некорректный email или пароль!');
-            };
+            password: passwordProps.value, 
+            isSignIn,
         });
+        resetEmail('');
+        resetPassword('');
     };
 
     const handleLogin = (e) => {
@@ -36,36 +27,32 @@ function LoginForm({ onSubmit = f => f }) {
         setSignIn(prevState => !prevState);
     };
 
-    const handleBtn = (emailProps.value.trim() && passwordProps.value.trim())
-
     return (
         <form onSubmit={handleSubmit}>
             <div className={s.root}>
                 <input 
-                    type="text" 
+                    type='email'
                     className={s.input}
                     {...emailProps}
-                    required
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <span className={s.example}>Например: example@example.com</span>
+                <span className={s.message}>Например: example@example.com</span>
                 <label className={s.label}>e-mail</label>
             </div>
             <div className={s.root}>
                 <input 
-                    type="text" 
                     className={s.input}
+                    pattern='^(?=.*?[0-9])(?=.*?[A-Z])(?=.*?[#?!@$%^&*-_]).{6,25}$'
                     {...passwordProps}
-                    required
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <span className={s.example}>Пароль должен содержать от 6 до 25 символов</span>
+                <span className={s.message}>Пароль должен содержать от 6 до 25 символов</span>
                 <label className={s.label}>Пароль</label>
             </div>
             <div className={s.form_btn}>
-                <Button isDisabled={!handleBtn}>
+                <Button>
                     { isSignIn ? 'Войти' : 'Создать' }
                 </Button>
                 <button 

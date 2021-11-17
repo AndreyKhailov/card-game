@@ -1,31 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { NotificationManager } from 'react-notifications';
 
 import { Menu, NavBar } from "./";
-import { Modal, LoginForm, ExitForm } from "../";
+import { Modal, LoginForm } from "../";
 
-import { submitForm, error, success, auth, exitLogin } from '../../store/login';
+import { submitForm, selectUserLoading } from '../../store/user';
 
 function MenuHeader({ bgActive }) {
-    const history = useHistory();
     const dispatch = useDispatch();
-    const successResponse = useSelector(success);
-    const errorResponse = useSelector(error);
-    // const isAuth = useSelector(auth);
-
+    const isAuth = useSelector(selectUserLoading);
     const [activeMenu, setActiveMenu] = useState(null);
     const [isOpenModal, setOpenModal] = useState(false);
 
     useEffect(() => {
-        errorResponse 
-            && NotificationManager.error(errorResponse, 'title');
-        
-        successResponse
-            && handleClickModal()
-            && NotificationManager.success('success', 'title')
-    }, [errorResponse, successResponse]);
+        isAuth && setOpenModal(false)
+    }, [isAuth])
 
     const handleButtonMenu = () => {
         setActiveMenu(prevState => !prevState);
@@ -38,12 +27,6 @@ function MenuHeader({ bgActive }) {
     const handleSubmitForm = ({ email, password, isSignIn }) => {
         dispatch(submitForm({ email, password, isSignIn }))
     };
-
-    // const handleExitLogin = () => {
-    //     dispatch(exitLogin());
-    //     handleClickModal();
-    //     history.push('/');
-    // };
 
     return (
         <>
@@ -62,12 +45,6 @@ function MenuHeader({ bgActive }) {
                 onCloseModal={handleClickModal}
                 title='Auth...'
             >
-                {/* { !isAuth  ? <LoginForm onSubmit={handleSubmitForm} />
-                    : <ExitForm 
-                        onCloseModal={handleClickModal}
-                        onExitLogin={handleExitLogin}
-                    />
-                } */}
                 <LoginForm onSubmit={handleSubmitForm} />
             </Modal>
         </>

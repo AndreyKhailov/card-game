@@ -5,7 +5,8 @@ const useInput = (initValue) => {
     return [
         { 
             value, 
-            onChange: e => setValue(e.target.value) 
+            onChange: e => setValue(e.target.value),
+            required: true,
         },
         () => setValue(initValue),
     ];

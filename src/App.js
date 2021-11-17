@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
 import { useLocation, Redirect, Route, Switch } from 'react-router';
 import { NotificationContainer } from 'react-notifications';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { MenuHeader, Footer, PrivateRoute } from './components';
 import { Home, Game, About, Contacts, User, NotFound } from './routes';
-import { getUserAsync, selectUserLoading } from './store/user';
+import { getUserAsync } from './store/user';
 
 import s from './app.module.css';
 import cn from 'classnames';
 import 'react-notifications/lib/notifications.css';
 
 function App() {
-  const isUserLoading = useSelector(selectUserLoading);
   const location = useLocation();
   const isPadding = location.pathname === '/' || location.pathname === '/game/board';
   const dispatch = useDispatch();
@@ -20,10 +19,6 @@ function App() {
   useEffect(() => {
     dispatch(getUserAsync());
   }, []);
-
-  if (isUserLoading) {
-    return 'Loading ...';
-  }
 
   return (
     <>

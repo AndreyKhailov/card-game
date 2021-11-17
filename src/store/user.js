@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { NotificationManager } from 'react-notifications';
 
 import FireBaseClass from '../service/firebaseInit';
+import request from '../service/request';
 
-import { SIGN_AUTH } from './constants';
+import { SIGN_AUTH, SIGN_IN, SIGN_UP } from './constants';
 
 export const slice = createSlice({
   name: 'user',
   initialState: {
-    isLoading: true,
+    isLoading: false,
     data: {},
   },
   reducers: {
+    fetchLoading: () => ({
+      isLoading: false,
+    }),
     fetchUser: () => ({
       isLoading: true,
     }),
@@ -25,11 +30,51 @@ export const slice = createSlice({
   },
 });
 
-export const { fetchUser, updateUser, removeUser } = slice.actions;
+export const { fetchLoading, fetchUser, updateUser, removeUser } = slice.actions;
 
 export const selectUserLoading = (state) => state.user.isLoading;
 export const selectUser = (state) => state.user.data;
 export const selectLocalID = (state) => state.user.data?.localId;
+
+export const submitForm =
+  ({ email, password, isSignIn }) =>
+  async (dispatch) => {
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify({
+        email,
+        password,
+        returnSecureToken: true,
+      }),
+    };
+    dispatch(fetchUser());
+    const response = await fetch(isSignIn ? SIGN_IN : SIGN_UP, requestOptions).then((res) =>
+      res.json(),
+    );
+
+    if (response.hasOwnProperty('error')) {
+      NotificationManager.error('Ошибка! Повторите снова');
+    } else {
+      localStorage.setItem('idToken', response.idToken);
+      if (!isSignIn) {
+        FireBaseClass.setLocalID(response.localId);
+
+        const cardsStart = await request.getStarterKit();
+
+        for (const item of cardsStart.data) {
+          await FireBaseClass.addCard(item);
+        }
+        NotificationManager.success('Поздравляем!', 'Вы успешно зарегистрировались');
+      }
+      isSignIn && NotificationManager.success('Поздравляем!', 'Вы успешно авторизовались');
+      dispatch(fetchLoading());
+    }
+  };
+
+export const logout = () => async () => {
+  localStorage.removeItem('idToken');
+  NotificationManager.success('Logout', 'Вы успешно вышли из системы');
+};
 
 export const getUserUpdateAsync = () => async (dispatch) => {
   const idToken = FireBaseClass.token();

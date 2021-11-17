@@ -2,9 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectUser } from '../../store/user';
-import { logout } from '../../store/login';
-
+import { selectUser, logout } from '../../store/user';
 import { Button } from '../../components';
 
 import s from './user.module.css';

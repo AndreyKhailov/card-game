@@ -9,7 +9,7 @@ import { getCardsAsync, selectCardsData, selectCardsLoading, selectedCards, hand
 import s from './startPage.module.css';
 
 function StartPage() {
-    const isLoading = useSelector(selectCardsLoading);
+    // const isLoading = useSelector(selectCardsLoading);
     const cardsRedux = useSelector(selectCardsData);
     const selected = useSelector(selectedCards);
     const dispatch = useDispatch();
