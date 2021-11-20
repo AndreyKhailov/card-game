@@ -1,8 +1,44 @@
+import { FC } from 'react';
 import cn from 'classnames';
 
 import s from './cards.module.css';
 
-function Cards({ className, objID, id, type, values, name, img, isActive, isSelected, onClickCard, minimize, possession }) {
+interface ValuesTypes {
+    top: string;
+    right: number;
+    bottom: number;
+    left: number;
+}
+
+interface CardsProps {
+    className: string;
+    objID: string;
+    id: number;
+    type: string;
+    values: ValuesTypes;
+    name: string;
+    img: string;
+    isActive?: boolean;
+    isSelected?: boolean;
+    onClickCard: any;
+    minimize?: boolean;
+    possession: string;
+}
+
+const Cards: FC<CardsProps> = ({ 
+    className,
+    objID,
+    id,
+    type,
+    values,
+    name,
+    img,
+    isActive,
+    isSelected,
+    onClickCard,
+    minimize,
+    possession
+}) => {
 
     const handleClick = () => {
         onClickCard && onClickCard(objID);
