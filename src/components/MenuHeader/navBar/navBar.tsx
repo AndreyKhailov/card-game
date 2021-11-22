@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import cn from 'classnames';
 
 import { useSelector } from 'react-redux';
@@ -10,17 +11,25 @@ import {ReactComponent as UserSVG} from '../../../asserts/svg/user.svg';
 
 import s from './navBar.module.css';
 
-function NavBar({ activeMenu, bgActive = false, onChangeActive, onClickLogin }) {
-    const isLoadingUser = useSelector(selectUserLoading);
-    const localID = useSelector(selectLocalID);
-    
-    const onClickButtonMenu = () => {
-        onChangeActive && onChangeActive();
-    };
+interface navBarProps {
+    activeMenu: boolean | null;
+    bgActive: boolean;
+    onChangeActive: () => void; 
+    onClickLogin: () => void;
+};
 
-    const onClickLoginIcon = () => {
-        onClickLogin && onClickLogin();
-    };
+const NavBar:FC<navBarProps> = ({ 
+    activeMenu, 
+    bgActive = false, 
+    onChangeActive = (f:void) => f, 
+    onClickLogin = (f:void) => f,
+}) => {
+    const isLoadingUser:boolean = useSelector(selectUserLoading);
+    const localID:string = useSelector(selectLocalID);
+    
+    const onClickButtonMenu = () => onChangeActive();
+
+    const onClickLoginIcon = () => onClickLogin();
 
     return (
         <nav className={cn(s.root, {[s.bgActive]: bgActive})}>
