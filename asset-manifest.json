@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/card-game/static/css/main.85624ca1.chunk.css",
+    "main.js": "/card-game/static/js/main.547445c6.chunk.js",
+    "main.js.map": "/card-game/static/js/main.547445c6.chunk.js.map",
+    "runtime-main.js": "/card-game/static/js/runtime-main.a290db25.js",
+    "runtime-main.js.map": "/card-game/static/js/runtime-main.a290db25.js.map",
+    "static/css/2.f5764e6e.chunk.css": "/card-game/static/css/2.f5764e6e.chunk.css",
+    "static/js/2.605ec1b1.chunk.js": "/card-game/static/js/2.605ec1b1.chunk.js",
+    "static/js/2.605ec1b1.chunk.js.map": "/card-game/static/js/2.605ec1b1.chunk.js.map",
+    "index.html": "/card-game/index.html",
+    "static/css/2.f5764e6e.chunk.css.map": "/card-game/static/css/2.f5764e6e.chunk.css.map",
+    "static/css/main.85624ca1.chunk.css.map": "/card-game/static/css/main.85624ca1.chunk.css.map",
+    "static/js/2.605ec1b1.chunk.js.LICENSE.txt": "/card-game/static/js/2.605ec1b1.chunk.js.LICENSE.txt",
+    "static/media/header.module.css": "/card-game/static/media/Stars.d1095ee0.svg",
+    "static/media/bglayout_1.2bb3f298.jpg": "/card-game/static/media/bglayout_1.2bb3f298.jpg",
+    "static/media/bglayout_2.1ab94531.jpg": "/card-game/static/media/bglayout_2.1ab94531.jpg",
+    "static/media/boardPage.module.css": "/card-game/static/media/board.73af5dd5.png",
+    "static/media/cards.module.css": "/card-game/static/media/card-back-side.3bc67f21.jpg",
+    "static/media/login.778b2d73.svg": "/card-game/static/media/login.778b2d73.svg",
+    "static/media/notifications.css": "/card-game/static/media/notification.c5d9251e.ttf",
+    "static/media/user.673d650b.svg": "/card-game/static/media/user.673d650b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a290db25.js",
+    "static/css/2.f5764e6e.chunk.css",
+    "static/js/2.605ec1b1.chunk.js",
+    "static/css/main.85624ca1.chunk.css",
+    "static/js/main.547445c6.chunk.js"
+  ]
+}
