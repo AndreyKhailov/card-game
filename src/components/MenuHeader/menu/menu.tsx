@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -22,11 +23,14 @@ const MENU = [
     },
 ];
 
-function Menu({ activeMenu, closeMenu }) {
+interface menuProps {
+    activeMenu: boolean | null;
+    closeMenu: () => void;
+}
+
+const Menu:FC<menuProps> = ({ activeMenu, closeMenu = (f:void) => f }) => {
     
-    const onCloseMenu = () => {
-        onCloseMenu && closeMenu();
-    };
+    const onCloseMenu = () => closeMenu();
 
     return (
         <div className={cn(s.menuContainer, {
