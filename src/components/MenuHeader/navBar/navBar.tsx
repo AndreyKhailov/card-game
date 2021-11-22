@@ -34,7 +34,7 @@ const NavBar:FC<navBarProps> = ({
     return (
         <nav className={cn(s.root, {[s.bgActive]: bgActive})}>
             <div className={s.navWrapper}>
-                <p className={s.brand}>LOGO</p>
+                <p className={s.brand}>Triple Triad</p>
                 <div className={s.loginAndMenu}>
                     {(!isLoadingUser && !localID) && (
                         <div 
