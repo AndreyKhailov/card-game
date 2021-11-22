@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Игра по мотивам Triple Triad
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center"><img src="https://github.com/AndreyKhaylov/card-game/blob/master/src/asserts/jpg/%D0%BB%D0%BE%D0%B3%D0%BE.jpg" max-width="800"></p>
 
-## Available Scripts
+## О проекте
 
-In the project directory, you can run:
+  Приложение для проверки знаний React JS.
 
-### `npm start`
+- [Demo-версия](https://andreykhaylov.github.io/card-game/).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Технологии
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- HTML;
+- CSS;
+- TypeScript;
+- JavaScript;
+- React JS;
+- Create React App (CRA);
+- FireBase(realtime database / authentication);
+- Redux/redux-toolkit/react-redux;
+- React-router;
+- Classnames;
 
-### `npm test`
+## Установленные пакеты
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - "@reduxjs/toolkit": "^1.6.1";
+  - "@testing-library/jest-dom": "^5.14.1";
+  - "@testing-library/react": "^11.2.7";
+  - "@testing-library/user-event": "^12.8.3";
+  - "@types/jest": "^27.0.3";
+  - "@types/node": "^16.11.9";
+  - "@types/react": "^17.0.35";
+  - "@types/react-dom": "^17.0.11";
+  - "classnames": "^2.3.1";
+  - "firebase": "^9.0.2";
+  - "gh-pages": "^3.2.3";
+  - "react": "^17.0.2";
+  - "react-dom": "^17.0.2";
+  - "react-notifications": "^1.7.2";
+  - "react-redux": "^7.2.5";
+  - "react-router-dom": "^5.3.0";
+  - "react-scripts": "4.0.3";
+  - "redux": "^4.1.1";
+  - "typescript": "^4.5.2";
+  - "web-vitals": "^1.1.2";
