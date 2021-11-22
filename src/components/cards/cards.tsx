@@ -8,7 +8,7 @@ interface ValuesTypes {
     right: number;
     bottom: number;
     left: number;
-}
+};
 
 interface CardsProps {
     className: string;
@@ -20,10 +20,10 @@ interface CardsProps {
     img: string;
     isActive?: boolean;
     isSelected?: boolean;
-    onClickCard: any;
-    minimize?: boolean;
+    onClickCard: (f:string) => string;
     possession: string;
-}
+    minimize: boolean;
+};
 
 const Cards: FC<CardsProps> = ({ 
     className,
@@ -35,13 +35,13 @@ const Cards: FC<CardsProps> = ({
     img,
     isActive,
     isSelected,
-    onClickCard,
+    onClickCard = f => f,
     minimize,
     possession
 }) => {
 
     const handleClick = () => {
-        onClickCard && onClickCard(objID);
+        onClickCard(objID);
     };
 
     return (

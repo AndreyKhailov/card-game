@@ -1,10 +1,16 @@
+import { FC } from 'react';
 import { useHistory } from 'react-router';
 
 import { Button } from '../';
 
 import s from './header.module.css';
 
-function Header({ title, desc }) {
+interface HeaderProps {
+    title: any;
+    desc: string;
+}
+
+const Header: FC<HeaderProps> = ({ title, desc }) => {
     const history = useHistory();
 
     const onClickToStartGame = () => {
