@@ -1,6 +1,6 @@
 export { default as MenuHeader } from './MenuHeader/menuHeader';
-export { default as Header } from './header/header';
-export { default as Layout } from './layout/layout';
+export { default as Header } from './header/header.tsx';
+export { default as Layout } from './layout/layout.tsx';
 export { default as Cards } from './cards/cards.tsx';
 export { default as Footer } from './footer/footer';
 export { default as Modal } from './modal/modal';
