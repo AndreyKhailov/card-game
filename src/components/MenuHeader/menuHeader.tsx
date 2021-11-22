@@ -1,20 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Menu, NavBar } from "./";
-import { Modal, LoginForm } from "../";
+import { Menu, NavBar } from ".";
+import { Modal, LoginForm } from "..";
 
 import { submitForm, selectUserLoading } from '../../store/user';
 
-function MenuHeader({ bgActive }) {
+interface MenuHeaderProps {
+    bgActive: boolean;
+};
+
+const MenuHeader:FC<MenuHeaderProps> = ({ bgActive }) => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(selectUserLoading);
-    const [activeMenu, setActiveMenu] = useState(null);
-    const [isOpenModal, setOpenModal] = useState(false);
+    const isAuth:boolean = useSelector(selectUserLoading);
+    const [activeMenu, setActiveMenu] = useState<boolean | null>(null);
+    const [isOpenModal, setOpenModal] = useState<boolean>(false);
 
     useEffect(() => {
         isAuth && setOpenModal(false)
-    }, [isAuth])
+    }, [isAuth]);
 
     const handleButtonMenu = () => {
         setActiveMenu(prevState => !prevState);
@@ -24,7 +28,7 @@ function MenuHeader({ bgActive }) {
         setOpenModal(prevState => !prevState);
     };
 
-    const handleSubmitForm = ({ email, password, isSignIn }) => {
+    const handleSubmitForm = ({ email, password, isSignIn }:any) => {
         dispatch(submitForm({ email, password, isSignIn }))
     };
 

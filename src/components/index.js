@@ -1,4 +1,4 @@
-export { default as MenuHeader } from './MenuHeader/menuHeader';
+export { default as MenuHeader } from './MenuHeader/menuHeader.tsx';
 export { default as Header } from './header/header.tsx';
 export { default as Layout } from './layout/layout.tsx';
 export { default as Cards } from './cards/cards.tsx';
