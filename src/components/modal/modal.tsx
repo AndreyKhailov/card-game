@@ -5,7 +5,7 @@ import s from './modal.module.css';
 
 interface modalProps {
     title: string;
-    children: FC;
+    children: typeof React.Component | React.FC;
     isOpen: boolean;
     onCloseModal: () => void;
 }
@@ -21,7 +21,10 @@ const Modal:FC<modalProps> = ({
     const modalEl = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        document.querySelector('body').style.overflow = isOpen && 'hidden';
+        if(isOpen) {
+            const selector = document.querySelector('body') as HTMLElement;
+            selector.style.overflow = 'hidden';
+        }
     }, [isOpen]);
 
     const handleCloseModal = () => {
