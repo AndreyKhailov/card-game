@@ -1,21 +1,35 @@
-import { useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import cn from 'classnames';
 
 import s from './modal.module.css';
 
-function Modal({ title, children, isOpen, onCloseModal }) {
-    const modalEl = useRef();
+interface modalProps {
+    title: string;
+    children: FC;
+    isOpen: boolean;
+    onCloseModal: () => void;
+}
+
+const Modal:FC<modalProps> = ({ 
+    title, 
+    children, 
+    isOpen, 
+    onCloseModal = (f:void) => f,
+
+}) => {
+
+    const modalEl = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         document.querySelector('body').style.overflow = isOpen && 'hidden';
     }, [isOpen]);
 
     const handleCloseModal = () => {
-        onCloseModal && onCloseModal();
+        onCloseModal();
     };
 
-    const handleClickRoot = (event) => {
-        if(!modalEl.current.contains(event.target)) {
+    const handleClickRoot = (e: React.MouseEvent) => {
+        if(!modalEl.current?.contains(e.target as HTMLElement)) {
             handleCloseModal();
         };
     };
