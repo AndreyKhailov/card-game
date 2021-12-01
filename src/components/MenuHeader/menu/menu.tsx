@@ -2,24 +2,26 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
+import { rootUrl } from '../../../rootUrl';
+
 import s from './menu.module.css';
 
 const MENU = [
     {
         title: "home",
-        to: '/'
+        to: rootUrl,
     },
     {
         title: "game",
-        to: '/game'
+        to: `${rootUrl}/game`
     },
     {
         title: "about",
-        to: '/about'
+        to: `${rootUrl}/about`
     },
     {
         title: "contact",
-        to: '/contacts'
+        to: `${rootUrl}/contacts`
     },
 ];
 

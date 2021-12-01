@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -6,6 +6,7 @@ import { selectedCards, getPlayer2CardsAsync, boarding, cardsOfPlayer2, choiceCa
 
 import { Cards } from '../../../../components';
 import PlayerBoard from './component/playerBoard/playerBoard';
+import { rootUrl } from '../../../../rootUrl';
 
 import s from './boardPage.module.css';
 
@@ -27,7 +28,6 @@ const counterWin = (board, player1, player2) => {
 
 const BoardPage = () => {
     const history = useHistory();
-
     const dispatch = useDispatch();
 
     const player1Cards = useSelector(selectedCards);
@@ -65,7 +65,7 @@ const BoardPage = () => {
     }, [getBoardPlate]);
 
     if(!Object.keys(player1Cards).length) {
-        history.replace('/game');
+        history.replace(`${rootUrl}/game`);
     };
 
     const onClickBoardPlate = async (position) => {
@@ -99,14 +99,14 @@ const BoardPage = () => {
         if(steps === 9) {
             const [count1, count2] = counterWin(board, player1, player2);
             if(count1 > count2) {
-                history.push('/game/finish');
+                history.push(`${rootUrl}/game/finish`);
                 alert('WIN');
             } else if(count1 < count2) {
                 alert('LOSE');
-                history.push('/game/');
+                history.push(`${rootUrl}/game/`);
             } else {
                 alert('DRAW');
-                history.push('/game/');
+                history.push(`${rootUrl}/game/`);
             };
         };
     }, [steps])

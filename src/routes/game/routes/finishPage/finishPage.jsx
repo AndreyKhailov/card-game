@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectedCards, cardsOfPlayer2, cleanCards, addCardsAsync } from '../../../../store/cards';
 import { Cards, Button } from '../../../../components';
+import { rootUrl } from '../../../../rootUrl';
 
 import s from './finishPage.module.css';
 
 function FinishPage() {
     const history = useHistory();
-    
     const dispatch = useDispatch();
     
     const playerCards1 = useSelector(selectedCards);
@@ -35,7 +35,7 @@ function FinishPage() {
             findIsSelectedCard.isSelected = false
             dispatch(addCardsAsync(findIsSelectedCard));
             dispatch(cleanCards());
-            history.replace('/game');
+            history.replace(`${rootUrl}/game`);
         }
     };
 

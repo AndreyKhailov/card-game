@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { MenuHeader, Footer, PrivateRoute } from './components';
 import { Home, Game, About, Contacts, User, NotFound } from './routes';
 import { getUserAsync } from './store/user';
+import { rootUrl } from './rootUrl';
 
 import s from './app.module.css';
 import cn from 'classnames';
@@ -13,7 +14,8 @@ import 'react-notifications/lib/notifications.css';
 
 function App() {
   const location = useLocation();
-  const isPadding = location.pathname === '/' || location.pathname === '/game/board';
+  const isPadding =
+    location.pathname === `${rootUrl}` || location.pathname === `${rootUrl}/game/board`;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,11 +31,11 @@ function App() {
             <MenuHeader bgActive={!isPadding} />
             <div className={cn(s.wrap, { [s.isHomePage]: isPadding })}>
               <Switch>
-                <Route path='/' exact component={Home} />
-                <PrivateRoute path='/game' component={Game} />
-                <PrivateRoute path='/about' component={About} />
-                <PrivateRoute path='/user' component={User} />
-                <Route path='/contacts' component={Contacts} />
+                <Route path='/card-game' exact component={Home} />
+                <PrivateRoute path='/card-game/game' component={Game} />
+                <PrivateRoute path='/card-game/about' component={About} />
+                <PrivateRoute path='/card-game/user' component={User} />
+                <Route path='/card-game/contacts' component={Contacts} />
                 <Route render={() => <Redirect to='404' />} />
               </Switch>
             </div>

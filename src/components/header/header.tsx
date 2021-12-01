@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useHistory } from 'react-router';
 
 import { Button } from '../';
+import { rootUrl } from '../../rootUrl';
 
 import s from './header.module.css';
 
@@ -14,7 +15,7 @@ const Header: FC<HeaderProps> = ({ title, desc }) => {
     const history = useHistory();
 
     const onClickToStartGame = () => {
-        history.push('/game');
+        history.push(`${rootUrl}/game`);
     };
 
     return (

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUser, logout } from '../../store/user';
 import { Button } from '../../components';
+import { rootUrl } from '../../rootUrl';
 
 import s from './user.module.css';
 
@@ -14,7 +15,7 @@ function User() {
     
     const onClickLogout = () => {
         dispatch(logout());
-        history.push('/');
+        history.push(`${rootUrl}`);
     };
 
     return (

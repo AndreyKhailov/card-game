@@ -3,13 +3,12 @@ import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Cards, Button } from '../../../../components';
-
-import { getCardsAsync, selectCardsData, selectCardsLoading, selectedCards, handleSelectedCards } from '../../../../store/cards';
+import { getCardsAsync, selectCardsData, selectedCards, handleSelectedCards } from '../../../../store/cards';
+import { rootUrl } from '../../../../rootUrl';
 
 import s from './startPage.module.css';
 
 function StartPage() {
-    // const isLoading = useSelector(selectCardsLoading);
     const cardsRedux = useSelector(selectCardsData);
     const selected = useSelector(selectedCards);
     const dispatch = useDispatch();
@@ -26,7 +25,7 @@ function StartPage() {
     }, [cardsRedux]);
 
     const onClickGoToHome = () => {
-        history.push('/');
+        history.push(`${rootUrl}`);
     };
 
     const handleChangeSelected = (key) => {
@@ -43,7 +42,7 @@ function StartPage() {
     };
 
     const onClickGoToGamePage = () => {
-        history.push('/game/board');
+        history.push(`${rootUrl}/game/board`);
     };
 
     const checkingNumOfCards = Object.keys(selected).length < 5;
