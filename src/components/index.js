@@ -3,7 +3,7 @@ export { default as Header } from './header/header.tsx';
 export { default as Layout } from './layout/layout.tsx';
 export { default as Cards } from './cards/cards.tsx';
 export { default as Footer } from './footer/footer';
-export { default as Modal } from './modal/modal';
+export { default as Modal } from './modal/modal.tsx';
 export { default as LoginForm } from './loginForm/loginForm';
 export { default as Button } from './button/button.tsx';
 export { default as PrivateRoute } from './privateRoute/privateRoute';

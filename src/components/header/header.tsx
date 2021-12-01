@@ -6,7 +6,7 @@ import { Button } from '../';
 import s from './header.module.css';
 
 interface HeaderProps {
-    title: any;
+    title: string;
     desc: string;
 }
 

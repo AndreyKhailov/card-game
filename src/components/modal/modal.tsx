@@ -5,7 +5,7 @@ import s from './modal.module.css';
 
 interface modalProps {
     title: string;
-    children: typeof React.Component | React.FC;
+    children: any;
     isOpen: boolean;
     onCloseModal: () => void;
 }
