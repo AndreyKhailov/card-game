@@ -15,7 +15,7 @@ function User() {
     
     const onClickLogout = () => {
         dispatch(logout());
-        history.push(`${rootUrl}`);
+        history.push(`${rootUrl}/`);
     };
 
     return (

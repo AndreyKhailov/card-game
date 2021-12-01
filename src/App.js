@@ -15,7 +15,7 @@ import 'react-notifications/lib/notifications.css';
 function App() {
   const location = useLocation();
   const isPadding =
-    location.pathname === `${rootUrl}` || location.pathname === `${rootUrl}/game/board`;
+    location.pathname === `${rootUrl}/` || location.pathname === `${rootUrl}/game/board`;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
             <MenuHeader bgActive={!isPadding} />
             <div className={cn(s.wrap, { [s.isHomePage]: isPadding })}>
               <Switch>
-                <Route path='/card-game' exact component={Home} />
+                <Route path='/card-game/' exact component={Home} />
                 <PrivateRoute path='/card-game/game' component={Game} />
                 <PrivateRoute path='/card-game/about' component={About} />
                 <PrivateRoute path='/card-game/user' component={User} />

@@ -9,7 +9,7 @@ import s from './menu.module.css';
 const MENU = [
     {
         title: "home",
-        to: rootUrl,
+        to: `${rootUrl}/`,
     },
     {
         title: "game",

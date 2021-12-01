@@ -25,7 +25,7 @@ function StartPage() {
     }, [cardsRedux]);
 
     const onClickGoToHome = () => {
-        history.push(`${rootUrl}`);
+        history.push(`${rootUrl}/`);
     };
 
     const handleChangeSelected = (key) => {

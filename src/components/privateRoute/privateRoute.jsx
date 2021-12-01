@@ -9,7 +9,7 @@ function PrivateRoute({ component: Component, ...rest }) {
                 ? 
                     <Component {...props} /> 
                 :
-                    <Redirect to="/card-game" /> 
+                    <Redirect to="/card-game/" /> 
             }
         />
     )
