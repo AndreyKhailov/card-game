@@ -48,7 +48,7 @@ function LoginForm({ onSubmit = f => f }) {
                 />
                 <span className={s.highlight}></span>
                 <span className={s.bar}></span>
-                <span className={s.message}>Пароль должен содержать от 6 до 25 символов</span>
+                <span className={s.message}>Пароль должен содержать 6-25 разных символов. Например: E$5hd?2</span>
                 <label className={s.label}>Пароль</label>
             </div>
             <div className={s.form_btn}>

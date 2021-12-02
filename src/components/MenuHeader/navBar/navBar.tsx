@@ -47,7 +47,7 @@ const NavBar:FC<navBarProps> = ({
                     {(!isLoadingUser && localID) && (
                         <Link 
                             className={s.loginWrap}
-                            to="/user"
+                            to="/card-game/user"
                         >
                             <UserSVG />
                         </Link>
