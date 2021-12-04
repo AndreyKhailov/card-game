@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import React, { FC, useState } from 'react';
 
-import { Button } from '../../components';
+import { Button } from '..';
 import useInput from './hooks/useInput';
 
 import s from './loginForm.module.css';
 
-function LoginForm({ onSubmit = f => f }) {
+interface IFormValue {
+    email: string;
+    password: string;
+}
+
+interface ILoginForm {
+    onSubmit: (f:{}) => IFormValue;
+}
+
+const LoginForm:FC<ILoginForm> = ({ onSubmit }) => {
     const [emailProps, resetEmail] = useInput('');
     const [passwordProps, resetPassword] = useInput('');
-    const [isSignIn, setSignIn] = useState(true);
+    const [isSignIn, setSignIn] = useState<boolean>(true);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         onSubmit && onSubmit({
@@ -22,7 +31,7 @@ function LoginForm({ onSubmit = f => f }) {
         resetPassword('');
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setSignIn(prevState => !prevState);
     };
