@@ -22,24 +22,11 @@
   - LocalStorage;  
   - Classnames;
 
-## Установленные пакеты
+## Запуск
+  Для запуска локально: 
+  - склонировать репозиторий (git clone <https: ...>);
+  - установить зависимости командой в консоли (npm install);
+  - запустить в режиме разработки командой (npm start).
 
-  - "@reduxjs/toolkit": "^1.6.1";
-  - "@testing-library/jest-dom": "^5.14.1";
-  - "@testing-library/react": "^11.2.7";
-  - "@testing-library/user-event": "^12.8.3";
-  - "@types/jest": "^27.0.3";
-  - "@types/node": "^16.11.9";
-  - "@types/react": "^17.0.35";
-  - "@types/react-dom": "^17.0.11";
-  - "classnames": "^2.3.1";
-  - "firebase": "^9.0.2";
-  - "gh-pages": "^3.2.3";
-  - "react": "^17.0.2";
-  - "react-dom": "^17.0.2";
-  - "react-notifications": "^1.7.2";
-  - "react-redux": "^7.2.5";
-  - "react-router-dom": "^5.3.0";
-  - "react-scripts": "4.0.3";
-  - "redux": "^4.1.1";
-  - "typescript": "^4.5.2"; 
+  Для получения production версии:
+  - запустить команду npm run build. Проект собереться в папку build.
