@@ -16,16 +16,13 @@ export const slice = createSlice({
   },
   reducers: {
     fetchCards: (state) => ({
-      ...state,
       isLoading: true,
     }),
     fetchCardsResolve: (state, action) => ({
-      ...state,
       isLoading: false,
       data: action.payload,
     }),
     fetchCardsReject: (state, action) => ({
-      ...state,
       isLoading: false,
       data: {},
       error: action.payload,
@@ -40,7 +37,6 @@ export const slice = createSlice({
       return { ...state, selectedCards: newCards };
     },
     cleanCards: (state) => ({
-      ...state,
       data: {},
       selectedCards: {},
       player2: [],
@@ -48,20 +44,15 @@ export const slice = createSlice({
       choiceCard: [],
     }),
     setBoard: (state, action) => ({
-      ...state,
-      ...state.board,
       board: action.payload,
     }),
     setPlayer2: (state, action) => ({
-      ...state,
       player2: action.payload.data.map((item) => ({
         ...item,
         possession: 'red',
       })),
     }),
     choiceCard: (state, action) => ({
-      ...state,
-      ...state.choiceCard,
       choiceCard: action.payload,
     }),
   },
